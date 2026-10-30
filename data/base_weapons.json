@@ -1,0 +1,154 @@
+[
+  {
+    "name": "REV 46 ",
+    "image": "/uploads/1784856159577.png",
+    "id": "1783209442640",
+    "category": "Submetralhadora",
+    "playstyle": "Curto Alcance",
+    "game": "BO7"
+  },
+  {
+    "name": "MXR-17 ",
+    "image": "/uploads/1784857134549.png",
+    "id": "1783209625235",
+    "category": "fuzil de assalto",
+    "playstyle": "Longo Alcance",
+    "game": "BO7"
+  },
+  {
+    "name": "carbon 57",
+    "image": "/uploads/1784856647056.png",
+    "id": "1783209945126",
+    "category": "Submetralhadora",
+    "playstyle": "Meta Absoluto",
+    "game": "BO7"
+  },
+  {
+    "name": "AK 27",
+    "image": "/uploads/1784856978079.png",
+    "id": "1783264947249",
+    "category": "fuzil de assalto",
+    "playstyle": "Longo Alcance",
+    "game": "BO7"
+  },
+  {
+    "name": "kogot-7",
+    "image": "/uploads/1784856795913.png",
+    "id": "1783294520254",
+    "category": "Submetralhadora",
+    "playstyle": "Curto Alcance",
+    "game": "BO7"
+  },
+  {
+    "name": "an-94",
+    "image": "/uploads/1784856329260.png",
+    "id": "1783294574404",
+    "category": "fuzil de assalto",
+    "playstyle": "Meta Absoluto",
+    "game": "BO7"
+  },
+  {
+    "name": "sturmwolf 45",
+    "image": "/uploads/1784857224183.png",
+    "id": "1783295135589",
+    "category": "Submetralhadora",
+    "playstyle": "Curto Alcance",
+    "game": "BO7"
+  },
+  {
+    "name": "mpc-25",
+    "image": "/uploads/1784857307516.png",
+    "id": "1783295438833",
+    "category": "Submetralhadora",
+    "playstyle": "Curto Alcance",
+    "game": "BO7"
+  },
+  {
+    "name": "mk35 isr",
+    "category": "fuzil de assalto",
+    "playstyle": "Longo Alcance",
+    "image": "/uploads/1784856898398.png",
+    "id": "1783606781679",
+    "game": "BO7"
+  },
+  {
+    "name": "egrt 17",
+    "category": "fuzil de assalto",
+    "playstyle": "Longo Alcance",
+    "image": "/uploads/1784857433227.png",
+    "id": "1783635568517",
+    "game": "BO7"
+  },
+  {
+    "name": "VST",
+    "category": "Submetralhadora",
+    "playstyle": "Meta Absoluto",
+    "image": "/uploads/1784855959801.png",
+    "id": "1784216877030",
+    "game": "BO7"
+  },
+  {
+    "name": "madox rfb",
+    "category": "Fuzil de assaulto",
+    "playstyle": "Longo Alcance",
+    "image": "/uploads/1784857644289.png",
+    "id": "1784242159978",
+    "game": "BO7"
+  },
+  {
+    "name": "voyak kt3",
+    "category": "fuzil de assalto",
+    "playstyle": "Longo Alcance",
+    "image": "/uploads/1793330000172.png",
+    "id": "1784242179048",
+    "game": "BO7"
+  },
+  {
+    "name": "vx compact ",
+    "category": "fuzil de assalto",
+    "playstyle": "Longo Alcance",
+    "image": "/uploads/1784857702213.png",
+    "id": "1784242197891",
+    "game": "BO7"
+  },
+  {
+    "name": "FG42",
+    "category": "fuzil de assalto",
+    "playstyle": "Longo Alcance",
+    "image": "/uploads/1784857017661.png",
+    "id": "1784832330175",
+    "game": "BO7"
+  },
+  {
+    "name": "gremlin",
+    "category": "SUBMETRALHADORA",
+    "playstyle": "Curto Alcance",
+    "image": "/uploads/1784863771964.png",
+    "id": "1784832445859",
+    "game": "BO7"
+  },
+  {
+    "name": "STRIDER 300",
+    "category": "FUZIL DE PRECISÃO",
+    "playstyle": "Atirador de Elite",
+    "image": "/uploads/1784863496888.png",
+    "id": "1784863497194",
+    "game": "BO7"
+  },
+  {
+    "name": "M8A1",
+    "category": "FUZIL DE ATIRADOR",
+    "playstyle": "Fuzil de Atirador",
+    "image": "/uploads/1784864378161.png",
+    "id": "1784864378693",
+    "game": "BO7"
+  },
+  {
+    "name": "vmp",
+    "category": "submetralhadora",
+    "playstyle": "Meta Absoluto",
+    "game": "BO7",
+    "image": "/uploads/1793330022698.png",
+    "id": "1793330022767"
+  }
+]

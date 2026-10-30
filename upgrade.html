@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upgrade Premium — Warzone Metas</title>
+    <link rel="stylesheet" href="style.css?v=2">
+    <link href='fonts.css' rel='stylesheet'>
+    <!-- Firebase SDK Compat -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
+    <script src="auth.js?v=3"></script>
+    <script src="checkout.js?v=1"></script>
+    <style>
+        body {
+            background-color: #0b0e13;
+            color: #c9d1d9;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: rgba(12, 15, 20, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px 100px 20px;
+            text-align: center;
+        }
+
+        .header-section {
+            margin-bottom: 50px;
+        }
+
+        .header-section h1 {
+            font-family: 'Teko', sans-serif;
+            font-size: 52px;
+            font-weight: 700;
+            color: #fff;
+            margin: 0 0 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 1.1;
+        }
+
+        .header-section h1 span {
+            background: linear-gradient(135deg, #00d2ff 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-section p {
+            color: #8b949e;
+            font-size: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* ===== PLANS GRID ===== */
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 70px;
+            align-items: stretch;
+        }
+
+        .plan-card {
+            background: rgba(22, 27, 34, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 36px 28px;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .plan-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255,255,255,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .plan-card.pro-card {
+            background: linear-gradient(180deg, rgba(168, 85, 247, 0.05) 0%, rgba(22, 27, 34, 0.6) 100%);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            box-shadow: 0 4px 20px rgba(168, 85, 247, 0.08);
+        }
+
+        .plan-card.pro-card:hover {
+            border-color: rgba(168, 85, 247, 0.6);
+            box-shadow: 0 10px 40px rgba(168, 85, 247, 0.15);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 28px;
+            background: linear-gradient(135deg, #a855f7 0%, #00d2ff 100%);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 4px 14px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 10px rgba(168, 85, 247, 0.3);
+        }
+
+        .plan-name {
+            font-family: 'Teko', sans-serif;
+            font-size: 32px;
+            color: #fff;
+            text-transform: uppercase;
+            margin: 0 0 8px 0;
+            letter-spacing: 0.5px;
+            line-height: 1;
+        }
+
+        .plan-card.pro-card .plan-name {
+            color: #a855f7;
+        }
+
+        .plan-desc {
+            font-size: 13px;
+            color: #8b949e;
+            margin: 0 0 24px 0;
+            line-height: 1.4;
+            min-height: 38px;
+        }
+
+        .plan-price {
+            margin-bottom: 28px;
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+        }
+
+        .plan-price .currency {
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .plan-price .amount {
+            font-size: 42px;
+            font-weight: 800;
+            color: #fff;
+            font-family: 'Teko', sans-serif;
+            line-height: 1;
+        }
+
+        .plan-price .period {
+            font-size: 13px;
+            color: #8b949e;
+        }
+
+        .plan-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 36px 0;
+            flex-grow: 1;
+        }
+
+        .plan-features li {
+            font-size: 14px;
+            color: #c9d1d9;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            line-height: 1.4;
+        }
+
+        .plan-features li.disabled {
+            color: #555c66;
+            text-decoration: line-through;
+        }
+
+        .plan-features li .check-icon {
+            color: #3fb950;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .plan-features li .cross-icon {
+            color: #f85149;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .btn-action {
+            display: block;
+            width: 100%;
+            text-align: center;
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .btn-free {
+            background: rgba(255,255,255,0.06);
+            color: #8b949e;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .btn-free:hover {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+        }
+
+        .btn-normal {
+            background: linear-gradient(135deg, #00d2ff 0%, #0095b3 100%);
+            color: #000;
+        }
+
+        .btn-normal:hover {
+            filter: brightness(1.15);
+            box-shadow: 0 4px 15px rgba(0, 210, 255, 0.3);
+        }
+
+        .btn-pro {
+            background: linear-gradient(135deg, #a855f7 0%, #8b2cf5 100%);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.25);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-pro:hover {
+            filter: brightness(1.15);
+            box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4);
+        }
+
+        /* ===== SHOWCASE TABS ===== */
+        .showcase-section {
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 70px;
+        }
+
+        .showcase-section h2 {
+            font-family: 'Teko', sans-serif;
+            font-size: 38px;
+            color: #fff;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            letter-spacing: 0.5px;
+        }
+
+        .showcase-tabs-nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .tab-nav-btn {
+            background: rgba(16, 20, 26, 0.6);
+            border: 1px solid rgba(255,255,255,0.05);
+            color: #8b949e;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tab-nav-btn:hover {
+            color: #fff;
+            border-color: rgba(0, 210, 255, 0.3);
+            background: rgba(0, 210, 255, 0.03);
+            transform: translateY(-2px);
+        }
+
+        .tab-nav-btn.active {
+            background: linear-gradient(135deg, rgba(0, 210, 255, 0.15) 0%, rgba(168, 85, 247, 0.15) 100%);
+            border-color: #00d2ff;
+            color: #fff;
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.2);
+        }
+
+        .showcase-tabs-content {
+            background: rgba(16, 20, 26, 0.4);
+            border: 1px solid rgba(255,255,255,0.03);
+            border-radius: 16px;
+            padding: 40px;
+            min-height: 420px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .showcase-tab-pane {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .showcase-tab-pane.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .tab-pane-layout {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .tab-pane-preview {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mockup-container-large {
+            background: #06090d;
+            border: 1px solid #161b22;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 480px;
+            height: 380px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 0 40px rgba(0,0,0,0.8);
+        }
+
+        .tab-pane-info {
+            text-align: left;
+        }
+
+        .tab-pane-info h3 {
+            font-family: 'Teko', sans-serif;
+            font-size: 36px;
+            color: #fff;
+            margin: 0 0 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tab-pane-desc {
+            font-size: 15px;
+            color: #8b949e;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .tab-pane-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .tab-pane-features li {
+            font-size: 14px;
+            color: #c9d1d9;
+            line-height: 1.5;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        /* Large Mockups */
+        .mockup-comum-large {
+            width: 260px;
+            height: 340px;
+            background: radial-gradient(circle at center, #071924 0%, #03080d 100%);
+            border: 1px solid rgba(0, 210, 255, 0.4);
+            padding: 12px 14px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 210, 255, 0.15);
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        .mockup-comum-top-tag {
+            font-size: 7px;
+            color: #00d2ff;
+            letter-spacing: 1.5px;
+            font-weight: 800;
+            margin-bottom: -4px;
+            text-transform: uppercase;
+        }
+
+        .mockup-comum-title-large {
+            font-family: 'Teko', sans-serif;
+            font-size: 26px;
+            color: #fff;
+            margin-bottom: 0px;
+            line-height: 0.95;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .mockup-comum-category-box {
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(0, 210, 255, 0.25);
+            background: rgba(0, 210, 255, 0.04);
+            padding: 2px 6px;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .mockup-comum-category-box .category-label {
+            font-size: 5.5px;
+            color: #00d2ff;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        .mockup-comum-category-box .category-value {
+            font-size: 8px;
+            color: #fff;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .mockup-comum-weapon-container {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .mockup-comum-weapon-img-large {
+            max-width: 90%;
+            max-height: 70px;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.6));
+        }
+
+        .mockup-comum-grid-large {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5px;
+        }
+
+        .mockup-comum-pill {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+            font-size: 8px;
+            color: #e6edf3;
+            padding: 5px 8px;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: 600;
+            text-transform: uppercase;
+            white-space: normal;
+            word-break: break-word;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 28px;
+            line-height: 1.2;
+        }
+
+        /* Span the odd items if they are the first or last */
+        .mockup-comum-pill:first-child:nth-last-child(odd),
+        .mockup-comum-pill:first-child:nth-last-child(5) {
+            grid-column: span 2;
+        }
+
+        .mockup-comum-footer-info {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 5px;
+        }
+
+        .mockup-comum-footer-info .footer-box {
+            border: 1px solid rgba(0, 210, 255, 0.25);
+            background: rgba(0, 210, 255, 0.02);
+            display: flex;
+            flex-direction: column;
+            padding: 3px;
+            border-radius: 4px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mockup-comum-footer-info .footer-box .box-lbl {
+            font-size: 5.5px;
+            color: #00d2ff;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        .mockup-comum-footer-info .footer-box .box-val {
+            font-size: 9px;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .mockup-comum-footer-info .code-box {
+            border-style: dashed;
+        }
+
+        .mockup-comum-signature {
+            font-size: 7px;
+            color: rgba(255,255,255,0.4);
+            text-align: center;
+            margin-top: 2px;
+            letter-spacing: 0.5px;
+        }
+
+        /* PRO Large Mockup */
+        .mockup-pro-large {
+            width: 260px;
+            height: 340px;
+            background: linear-gradient(180deg, #090e17 0%, #030508 100%);
+            border: 1px solid rgba(168, 85, 247, 0.4);
+            padding: 14px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 25px rgba(168, 85, 247, 0.15);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        .mockup-pro-header-large {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 0px;
+        }
+
+        .mockup-pro-avatar-large {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1.5px solid #00d2ff;
+            box-shadow: 0 0 8px rgba(0, 210, 255, 0.4);
+            object-fit: cover;
+        }
+
+        .mockup-pro-meta-large {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .mockup-pro-meta-large .pro-tag-lbl {
+            font-size: 6px;
+            color: #00d2ff;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        .mockup-pro-meta-large .mockup-pro-name-large {
+            font-size: 11px;
+            font-weight: bold;
+            color: #fff;
+            line-height: 1;
+            text-transform: uppercase;
+        }
+
+        .mockup-pro-weapon-large {
+            font-family: 'Teko', sans-serif;
+            font-size: 24px;
+            color: #00d2ff;
+            line-height: 1;
+            margin-bottom: 2px;
+            text-align: left;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .mockup-pro-weapon-container {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mockup-pro-weapon-img-large {
+            max-width: 95%;
+            max-height: 70px;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.6));
+        }
+
+        .mockup-pro-grid-large {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+            width: 100%;
+        }
+
+        .mockup-pro-pill {
+            background: rgba(255, 255, 255, 0.04);
+            border: none;
+            border-left: 2.5px solid #00d2ff;
+            padding: 5px 8px;
+            border-radius: 0 4px 4px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1px;
+            min-height: 38px;
+            box-sizing: border-box;
+        }
+
+        .mockup-pro-pill:last-child:nth-child(odd) {
+            grid-column: span 2;
+        }
+
+        .mockup-pro-pill .pro-pill-lbl {
+            font-size: 5px;
+            color: #8b949e;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .mockup-pro-pill .pro-pill-val {
+            font-size: 7.5px;
+            color: #fff;
+            font-weight: 600;
+            text-align: left;
+            line-height: 1.2;
+            text-transform: uppercase;
+            white-space: normal;
+            word-break: break-word;
+            width: 100%;
+        }
+
+        /* Back to site buttons */
+        .footer-actions {
+            margin-top: 50px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #8b949e;
+            padding: 10px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.2s;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.06);
+            color: #fff;
+        }
+
+        /* OBS Large Mockup */
+        .mockup-obs-large {
+            width: 90%;
+            height: 80%;
+            background: #0f131a;
+            border: 2px solid #1f2937;
+            border-radius: 6px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .simulated-stream {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background: #020406;
+        }
+
+        .mockup-obs-cam-large {
+            width: 100px;
+            height: 75px;
+            border: 2px solid #00d2ff;
+            background: #111;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+
+        .mockup-obs-cam-img-large {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .mockup-obs-cam-placeholder-large {
+            font-size: 9px;
+            font-weight: 800;
+            color: #00d2ff;
+            text-align: center;
+            padding: 5px;
+        }
+
+        .mockup-obs-bar-large {
+            width: 100%;
+            height: 32px;
+            background: rgba(12, 15, 20, 0.95);
+            border-top: 2px solid #00d2ff;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        .mockup-obs-weapon-large, .mockup-obs-code-large {
+            font-family: 'Teko', sans-serif;
+            font-size: 18px;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        .mockup-obs-weapon-large .cyan, .mockup-obs-code-large .cyan {
+            color: #00d2ff;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .plans-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                max-width: 450px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .tab-pane-layout {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            .showcase-tabs-nav {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="top-nav">
+        <a href="/" class="brand">WARZONE BR <span>METAS</span></a>
+        <div class="nav-actions">
+            <a href="/admin.html" class="nav-link-item" id="nav-admin" style="display: none;">Meu Painel</a>
+            <a href="/instagram.html" class="nav-link-item" id="nav-gerador" style="display: none;">Gerador de Posts</a>
+            <a href="/admin_weapons.html" class="nav-link-item master-only" style="display: none;">Banco de Armas</a>
+            <a href="/admin_overlays.html" class="nav-link-item master-only" style="display: none;">Overlays</a>
+            <button class="btn-support" onclick="document.getElementById('livepixModal').style.display='flex'">☕ Apoie o Projeto</button>
+            <a href="/login.html" id="nav-login-btn" class="btn-login">LOGIN</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        
+        <div class="header-section">
+            <h1 id="upgrade-title">EVOLUA SEU CANAL COM O <span>METAS PREMIUM</span></h1>
+            <p id="upgrade-message">Crie seus próprios loadouts no banco de dados, libere overlays em tempo real para sua stream no OBS e gere posts de forma 100% automatizada.</p>
+        </div>
+
+        <!-- PLANS -->
+        <div class="plans-grid">
+            
+            <!-- PLAN: FREE -->
+            <div class="plan-card">
+                <div class="plan-name">LIVRE (FREE)</div>
+                <p class="plan-desc">Acesso de visualização ao meta principal do site para jogadores casuais.</p>
+                <div class="plan-price">
+                    <span class="currency">R$</span>
+                    <span class="amount">0</span>
+                    <span class="period">/sempre</span>
+                </div>
+                <ul class="plan-features">
+                    <li><span class="check-icon">✓</span> Acesso ao Ranking de Metas</li>
+                    <li><span class="check-icon">✓</span> Códigos de Compartilhamento</li>
+                    <li class="disabled"><span class="cross-icon">✗</span> Criar e Salvar Metas Próprios</li>
+                    <li class="disabled"><span class="cross-icon">✗</span> Overlays de Setup no OBS</li>
+                    <li class="disabled"><span class="cross-icon">✗</span> Geradores de Imagem e Post</li>
+                </ul>
+                <a href="/" class="btn-action btn-free">Plano Atual</a>
+            </div>
+
+            <!-- PLAN: NORMAL -->
+            <div class="plan-card">
+                <div class="plan-name">STREAMER (NORMAL)</div>
+                <p class="plan-desc">Salve suas classes personalizadas e exiba em tempo real para seu chat.</p>
+                <div class="plan-price">
+                        <span class="currency">R$</span>
+                        <span class="amount">14,90</span>
+                        <span class="period">/mensal</span>
+                </div>
+                <ul class="plan-features">
+                    <li><span class="check-icon">✓</span> Acesso ao Ranking de Metas</li>
+                    <li><span class="check-icon">✓</span> <b>Salvar Classes Pessoais (Banco)</b></li>
+                    <li><span class="check-icon">✓</span> Gerador de Posts Comum (Instagram)</li>
+                    <li class="disabled"><span class="cross-icon">✗</span> Overlays de Setup para OBS</li>
+                    <li class="disabled"><span class="cross-icon">✗</span> Perfil Customizado com Foto</li>
+                    <li class="disabled"><span class="cross-icon">✗</span> Gerador PRO com Foto/Assinatura</li>
+                </ul>
+                    <button id="btn-assinar-normal" class="btn-action btn-normal">ASSINAR NORMAL</button>
+            </div>
+
+            <!-- PLAN: PRO -->
+            <div class="plan-card pro-card">
+                <div class="popular-badge">MAIS COMPLETO</div>
+                <div class="plan-name">CRIADORES PRO (PRO)</div>
+                <p class="plan-desc">Destaque sua foto, branding e gere posts de ultra qualidade para engajar redes sociais.</p>
+                <div class="plan-price">
+                        <span class="currency">R$</span>
+                        <span class="amount">49,90</span>
+                        <span class="period">/mensal</span>
+                </div>
+                <ul class="plan-features">
+                    <li><span class="check-icon">✓</span> Tudo do plano NORMAL/Streamer</li>
+                    <li><span class="check-icon">✓</span> <b>Overlays de Setup para OBS (PRO)</b></li>
+                    <li><span class="check-icon">✓</span> <b>Aba "Criadores PRO" em destaque</b></li>
+                    <li><span class="check-icon">✓</span> <b>Upload de Foto e Design Pessoal</b></li>
+                    <li><span class="check-icon">✓</span> <b>Gerador PRO (Assinaturas e Cores)</b></li>
+                    <li><span class="check-icon">✓</span> Suporte VIP no Discord</li>
+                </ul>
+                    <button id="btn-assinar-pro-disabled" class="btn-action btn-pro" style="background: #333; color: #888; box-shadow: none; cursor: not-allowed; border: 1px solid #444;" disabled title="Estamos realizando melhorias no painel PRO. Tente novamente mais tarde.">EM MANUTENÇÃO</button>
+            </div>
+
+        </div>
+
+        <!-- SHOWCASE -->
+        <div class="showcase-section">
+            <h2>Nossas Ferramentas em Ação</h2>
+            
+            <!-- Tabs Headers -->
+            <div class="showcase-tabs-nav">
+                <button class="tab-nav-btn active" onclick="switchShowcaseTab('tab-comum')">
+                    <span class="tab-icon">📱</span> Gerador Comum (Instagram)
+                </button>
+                <button class="tab-nav-btn" onclick="switchShowcaseTab('tab-pro')">
+                    <span class="tab-icon">👑</span> Gerador PRO (Personalizado)
+                </button>
+                <button class="tab-nav-btn" onclick="switchShowcaseTab('tab-obs')">
+                    <span class="tab-icon">🎥</span> Overlay OBS (Tempo Real)
+                </button>
+            </div>
+            
+            <!-- Tabs Content -->
+            <div class="showcase-tabs-content">
+                
+                <!-- Tab Pane 1: Comum -->
+                <div id="tab-comum" class="showcase-tab-pane active">
+                    <div class="tab-pane-layout">
+                        <div class="tab-pane-preview">
+                            <div class="mockup-container-large">
+                                <div class="mockup-comum-large">
+                                    <div class="mockup-comum-top-tag">MELHOR CLASSE WARZONE</div>
+                                    <div id="mockup-comum-title" class="mockup-comum-title-large">SVA 545</div>
+                                    <div class="mockup-comum-category-box">
+                                        <span class="category-label">CATEGORIA</span>
+                                        <span id="mockup-comum-category" class="category-value">FUZIL DE ASSALTO</span>
+                                    </div>
+                                    <div class="mockup-comum-weapon-container">
+                                        <img id="mockup-comum-weapon-img" class="mockup-comum-weapon-img-large" src="" style="display: none;">
+                                        <div id="mockup-comum-weapon-placeholder" style="color: #6e7681; font-size: 8px;">CARREGANDO ARMA...</div>
+                                    </div>
+                                    <div id="mockup-comum-grid" class="mockup-comum-grid-large">
+                                        <div class="mockup-comum-pill">BOCA: Silenciador</div>
+                                        <div class="mockup-comum-pill">CANO: Longo Precision</div>
+                                        <div class="mockup-comum-pill">CARREGADOR: 60 Pro</div>
+                                    </div>
+                                    <div class="mockup-comum-footer-info">
+                                        <div class="footer-box">
+                                            <span class="box-lbl">TTK</span>
+                                            <span class="box-val">600 MS</span>
+                                        </div>
+                                        <div class="footer-box code-box">
+                                            <span class="box-lbl">CÓDIGO DE CLASSE</span>
+                                            <span id="mockup-comum-code" class="box-val">META-12345</span>
+                                        </div>
+                                    </div>
+                                    <div class="mockup-comum-signature">@GEREFPS_</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane-info">
+                            <h3>Gerador de Posts Comum</h3>
+                            <p class="tab-pane-desc">Crie imagens profissionais prontas para suas redes sociais em segundos, direto do seu navegador.</p>
+                            <ul class="tab-pane-features">
+                                <li>✨ <strong>Design Automatizado:</strong> Gera o card com o nome, categoria e anexos no estilo Warzone.</li>
+                                <li>📋 <strong>Código de Compartilhamento:</strong> Inclui o código do meta no rodapé para seus seguidores copiarem.</li>
+                                <li>🔥 <strong>Aumento de Engajamento:</strong> Facilita a postagem diária de loadouts no Instagram.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tab Pane 2: PRO -->
+                <div id="tab-pro" class="showcase-tab-pane">
+                    <div class="tab-pane-layout">
+                        <div class="tab-pane-preview">
+                            <div class="mockup-container-large">
+                                <div class="mockup-pro-large">
+                                    <div class="mockup-pro-header-large">
+                                        <img id="mockup-pro-avatar" class="mockup-pro-avatar-large" src="https://via.placeholder.com/100/a855f7/ffffff?text=G">
+                                        <div class="mockup-pro-meta-large">
+                                            <span class="pro-tag-lbl">PRO LOADOUT</span>
+                                            <span id="mockup-pro-name" class="mockup-pro-name-large">GEREFPS</span>
+                                        </div>
+                                    </div>
+                                    <div id="mockup-pro-weapon" class="mockup-pro-weapon-large">HRM-9</div>
+                                    <div class="mockup-pro-weapon-container">
+                                        <img id="mockup-pro-weapon-img" class="mockup-pro-weapon-img-large" src="" style="display: none;">
+                                    </div>
+                                    <div id="mockup-pro-grid" class="mockup-pro-grid-large">
+                                        <div class="mockup-pro-pill">
+                                            <span class="pro-pill-lbl">BOCA</span>
+                                            <span class="pro-pill-val">Sonic L</span>
+                                        </div>
+                                        <div class="mockup-pro-pill">
+                                            <span class="pro-pill-lbl">CANO</span>
+                                            <span class="pro-pill-val">L-Shield</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane-info">
+                            <h3>Gerador de Posts PRO</h3>
+                            <p class="tab-pane-desc">Impressione sua audiência com artes premium ultra detalhadas, carregando sua marca pessoal.</p>
+                            <ul class="tab-pane-features">
+                                <li>👑 <strong>Sua Identidade Visual:</strong> Carrega seu avatar, assinatura e redes sociais automaticamente.</li>
+                                <li>🎨 <strong>Branding Customizado:</strong> Layout com suas cores temáticas personalizadas.</li>
+                                <li>🎯 <strong>Fidelidade Máxima:</strong> Exibe a renderização da imagem real da arma vinculada no banco de dados.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tab Pane 3: OBS -->
+                <div id="tab-obs" class="showcase-tab-pane">
+                    <div class="tab-pane-layout">
+                        <div class="tab-pane-preview">
+                            <div class="mockup-container-large">
+                                <div class="mockup-obs-large">
+                                    <div class="simulated-stream">
+                                        <div class="mockup-obs-cam-large">
+                                            <img id="mockup-obs-cam-img" class="mockup-obs-cam-img-large" src="" style="display: none;">
+                                            <span id="mockup-obs-cam-placeholder" class="mockup-obs-cam-placeholder-large">WEBCAM DO STREAMER</span>
+                                        </div>
+                                        <div class="mockup-obs-bar-large">
+                                            <span id="mockup-obs-weapon" class="mockup-obs-weapon-large">CLASSE: <span class="cyan">RAM-7</span></span>
+                                            <span id="mockup-obs-code" class="mockup-obs-code-large">CÓDIGO: <span class="cyan">RAM7-LIVE</span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane-info">
+                            <h3>Overlays OBS em Tempo Real</h3>
+                            <p class="tab-pane-desc">Integração perfeita com sua live via link de fonte de navegador no OBS, Streamlabs ou vMix.</p>
+                            <ul class="tab-pane-features">
+                                <li>⚡ <strong>Atualização Instantânea:</strong> Mude os acessórios no seu painel e o overlay atualiza na live em segundos.</li>
+                                <li>📹 <strong>Visual Limpo:</strong> Fica perfeitamente posicionado abaixo ou ao redor da sua câmera.</li>
+                                <li>🧩 <strong>Fácil Instalação:</strong> Adicione como "Fonte de Navegador" (Browser Source) no seu software de transmissão.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="footer-actions">
+            <a href="/" class="btn-secondary">Voltar ao Início</a>
+        </div>
+
+    </div>
+
+    <script>
+        function switchShowcaseTab(tabId) {
+            // Hide all tab panes
+            document.querySelectorAll('.showcase-tab-pane').forEach(pane => {
+                pane.classList.remove('active');
+            });
+            // Deactivate all buttons
+            document.querySelectorAll('.tab-nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab pane
+            const pane = document.getElementById(tabId);
+            if (pane) pane.classList.add('active');
+            
+            // Activate button
+            const btn = document.querySelector(`.tab-nav-btn[onclick="switchShowcaseTab('${tabId}')"]`);
+            if (btn) btn.classList.add('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            await window.authReadyPromise;
+            const urlParams = new URLSearchParams(window.location.search);
+            const reason = urlParams.get('reason');
+            
+            if (reason === 'pro') {
+                const titleEl = document.getElementById('upgrade-title');
+                const descEl = document.getElementById('upgrade-message');
+                if (titleEl) titleEl.innerHTML = 'RECURSO EXCLUSIVO DO PLANO <span>CRIADORES PRO</span>';
+                if (descEl) descEl.innerHTML = 'Assine o plano Criadores PRO para ter acesso ao painel de gerenciamento exclusivo para criadores e criação de overlays da Twitch.';
+            } else if (reason === 'normal') {
+                const titleEl = document.getElementById('upgrade-title');
+                const descEl = document.getElementById('upgrade-message');
+                if (titleEl) titleEl.innerHTML = 'RECURSO DO PLANO <span>STREAMER (NORMAL)</span>';
+                if (descEl) descEl.textContent = 'Este recurso requer o Plano NORMAL. Faça o upgrade abaixo para poder salvar e gerenciar suas próprias armas no banco de dados e habilitar os overlays.';
+            }
+
+            // --- DYNAMIC SHOWCASE LOADER ---
+            try {
+                const [baseRes, pubWeaponsRes, pubProsRes] = await Promise.all([
+                    fetch('/api/base-weapons'),
+                    fetch('/api/public-weapons'),
+                    fetch('/api/public-pros')
+                ]);
+                
+                const baseWeapons = await baseRes.json();
+                const weapons = await pubWeaponsRes.json();
+                const pros = await pubProsRes.json();
+                
+                // 1. Populate Common Post and OBS Overlay with a real database weapon
+                if (weapons && weapons.length > 0) {
+                    const w = weapons[0]; // Master's first public weapon
+                    const baseW = baseWeapons.find(b => b.id === w.baseWeaponId) || {};
+                    
+                    document.getElementById('mockup-comum-title').textContent = w.weaponName || w.name;
+                    document.getElementById('mockup-comum-category').textContent = (baseW.category || w.category || 'Arma').toUpperCase();
+                    
+                    if (baseW.image) {
+                        document.getElementById('mockup-comum-weapon-img').src = baseW.image;
+                        document.getElementById('mockup-comum-weapon-img').style.display = 'block';
+                        document.getElementById('mockup-comum-weapon-placeholder').style.display = 'none';
+                    } else {
+                        document.getElementById('mockup-comum-weapon-img').style.display = 'none';
+                        document.getElementById('mockup-comum-weapon-placeholder').style.display = 'block';
+                    }
+                    
+                    let attachmentsHtml = '';
+                    if (w.attachments) {
+                        const entries = Object.entries(w.attachments).slice(0, 5); // Max 5 items
+                        entries.forEach(([slot, item]) => {
+                            let name = typeof item === 'string' ? item : (item ? item.name : '');
+                            if (name) {
+                                attachmentsHtml += `<div class="mockup-comum-pill">${slot.toUpperCase()}: ${name}</div>`;
+                            }
+                        });
+                    }
+                    if (attachmentsHtml) {
+                        document.getElementById('mockup-comum-grid').innerHTML = attachmentsHtml;
+                    }
+                    if (w.code) {
+                        document.getElementById('mockup-comum-code').textContent = w.code;
+                    }
+                    
+                    // Injects in OBS Overlay
+                    document.getElementById('mockup-obs-weapon').innerHTML = `CLASSE: <span class="cyan" style="color:#00d2ff; font-weight:bold;">${w.weaponName || w.name}</span>`;
+                    if (w.code) {
+                        document.getElementById('mockup-obs-code').innerHTML = `CÓDIGO: <span class="cyan" style="color:#00d2ff; font-weight:bold;">${w.code}</span>`;
+                    }
+                }
+                
+                // 2. Populate PRO Post with a real creator from database (prioritizing 'gerefps')
+                if (pros && pros.length > 0) {
+                    // Try to find the user's specific registration 'gerefps'
+                    let pro = pros.find(p => p.proName.toLowerCase().includes('gerefps'));
+                    if (!pro) pro = pros[0]; // Fallback to first creator
+                    
+                    document.getElementById('mockup-pro-name').textContent = pro.proName.toUpperCase();
+                    document.getElementById('mockup-pro-weapon').textContent = pro.weaponName;
+                    
+                    // Set common showcase signature to the Pro's handle as well
+                    document.querySelectorAll('.mockup-comum-signature').forEach(el => {
+                        el.textContent = `@${pro.proName.toUpperCase()}`;
+                    });
+                    
+                    if (pro.photoUrl) {
+                        document.getElementById('mockup-pro-avatar').src = pro.photoUrl;
+                        document.getElementById('mockup-obs-cam-img').src = pro.photoUrl;
+                        document.getElementById('mockup-obs-cam-img').style.display = 'block';
+                        document.getElementById('mockup-obs-cam-placeholder').style.display = 'none';
+                    }
+                    
+                    let proAttachmentsHtml = '';
+                    if (pro.attachments) {
+                        const entries = Object.entries(pro.attachments).slice(0, 5); // Max 5 items
+                        entries.forEach(([slot, item]) => {
+                            let name = typeof item === 'string' ? item : (item ? item.name : '');
+                            if (name) {
+                                proAttachmentsHtml += `
+                                    <div class="mockup-pro-pill">
+                                        <span class="pro-pill-lbl">${slot.toUpperCase()}</span>
+                                        <span class="pro-pill-val">${name}</span>
+                                    </div>`;
+                            }
+                        });
+                    }
+                    if (proAttachmentsHtml) {
+                        document.getElementById('mockup-pro-grid').innerHTML = proAttachmentsHtml;
+                    }
+                    
+                    // Get weapon image from base weapons if not directly available
+                    let imgSrc = pro.weaponImage;
+                    if (!imgSrc && pro.baseWeaponId) {
+                        const bw = baseWeapons.find(b => b.id === pro.baseWeaponId);
+                        if (bw && bw.image) imgSrc = bw.image;
+                    }
+                    
+                    if (imgSrc) {
+                        document.getElementById('mockup-pro-weapon-img').src = imgSrc;
+                        document.getElementById('mockup-pro-weapon-img').style.display = 'block';
+                    } else {
+                        document.getElementById('mockup-pro-weapon-img').style.display = 'none';
+                    }
+                }
+            } catch (e) {
+                console.error("Erro ao carregar dados dinâmicos para mockups:", e);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loadouts PRO</title>
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#050a12">
+    <!-- Fontes Modernas -->
+    <link href='fonts.css' rel='stylesheet'>
+    
+    <style>
+        :root {
+            --brand-color: #00d2ff;
+            --brand-glow: rgba(0, 210, 255, 0.4);
+            --bg-dark: #050a12;
+            --card-bg: rgba(15, 20, 30, 0.7);
+            --card-border: rgba(255,255,255,0.08);
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: var(--bg-dark);
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Fundo Linktree */
+        #pageBackground {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(5,10,18,0.95) 100%), url('fundo_app.jpg') center/cover no-repeat;
+            filter: blur(8px);
+            transform: scale(1.1);
+            z-index: -2;
+        }
+
+        #pageOverlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: var(--brand-color);
+            mix-blend-mode: overlay;
+            opacity: 0.15;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Container Centralizado */
+        .linktree-container {
+            width: 100%;
+            max-width: 480px;
+            padding: 40px 20px 80px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1;
+            min-height: 100vh;
+        }
+
+        /* Perfil */
+        .profile-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 35px;
+            text-align: center;
+            animation: fadeInDown 0.6s ease;
+        }
+
+        .profile-avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--brand-color);
+            box-shadow: 0 0 25px var(--brand-glow);
+            margin-bottom: 15px;
+        }
+
+        .profile-handle {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            color: #fff;
+            margin: 0 0 5px 0;
+            letter-spacing: 0.5px;
+        }
+
+        .profile-bio {
+            font-size: 14px;
+            color: #a0a8b5;
+            margin: 0;
+            line-height: 1.4;
+            max-width: 90%;
+        }
+
+        .profile-bio span {
+            color: var(--brand-color);
+            font-weight: 600;
+        }
+
+        /* Lista de Links (Armas) */
+        .links-list {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .weapon-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            animation: fadeInUp 0.5s ease backwards;
+        }
+
+        .weapon-card.active {
+            border-color: var(--brand-color);
+            box-shadow: 0 0 20px var(--brand-glow), inset 0 0 10px rgba(0,210,255,0.1);
+        }
+
+        .weapon-header {
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .weapon-header:hover {
+            background: rgba(255,255,255,0.05);
+        }
+
+        .weapon-thumb {
+            width: 60px;
+            height: 40px;
+            object-fit: contain;
+            margin-right: 15px;
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5));
+        }
+
+        .weapon-title-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .weapon-name {
+            font-family: 'Teko', sans-serif;
+            font-size: 26px;
+            font-weight: 600;
+            line-height: 1;
+            color: #fff;
+            margin: 0 0 2px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .weapon-category {
+            font-size: 11px;
+            color: var(--brand-color);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .expand-icon {
+            font-size: 14px;
+            color: #a0a8b5;
+            transition: transform 0.3s;
+        }
+
+        .weapon-card.active .expand-icon {
+            transform: rotate(180deg);
+            color: var(--brand-color);
+        }
+
+        /* Detalhes da Arma (Sanfona) */
+        .weapon-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0, 1, 0, 1);
+            background: rgba(0,0,0,0.3);
+            border-top: 1px solid transparent;
+        }
+
+        .weapon-card.active .weapon-body {
+            max-height: 800px; /* Suficiente para o conteúdo */
+            border-top-color: rgba(255,255,255,0.05);
+            transition: max-height 0.6s ease-in-out;
+        }
+
+        .attachments-list {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .attachment-item {
+            display: flex;
+            flex-direction: column;
+            background: rgba(255,255,255,0.03);
+            padding: 10px 14px;
+            border-radius: 8px;
+            border-left: 2px solid var(--brand-color);
+        }
+
+        .attachment-type {
+            font-family: 'Inter', sans-serif;
+            font-size: 10px;
+            color: #a0a8b5;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 3px;
+        }
+
+        .attachment-name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .copy-code-btn {
+            margin-top: 10px;
+            background: rgba(0, 210, 255, 0.1);
+            border: 1px solid rgba(0, 210, 255, 0.3);
+            color: var(--brand-color);
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .copy-code-btn:hover {
+            background: var(--brand-color);
+            color: #000;
+        }
+
+        /* Footer */
+        .linktree-footer {
+            margin-top: auto;
+            padding-top: 40px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Teko', sans-serif;
+            font-size: 20px;
+            color: rgba(255,255,255,0.3);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+
+        .linktree-footer span {
+            color: var(--brand-color);
+            opacity: 0.6;
+        }
+
+        /* Animações */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .loading-spinner {
+            color: var(--brand-color);
+            font-size: 16px;
+            margin-top: 40px;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="pageBackground"></div>
+    <div id="pageOverlay"></div>
+
+    <div class="linktree-container" id="appContainer">
+        <div class="loading-spinner">Carregando perfil...</div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const container = document.getElementById('appContainer');
+            
+            // Pega o handle da URL (ex: /gerefps -> gerefps)
+            const handleParam = window.location.pathname.substring(1).replace(/\/$/, ""); 
+            
+            if (!handleParam) {
+                container.innerHTML = '<div style="color:#ff3333; margin-top:50px;">Criador não encontrado.</div>';
+                return;
+            }
+
+            try {
+                // 1. Buscar Pros e Armas Base
+                async function fetchWithFallback(apiPath, staticPath) {
+                    try {
+                        const res = await fetch(apiPath);
+                        if (res.ok) return await res.json();
+                    } catch(e) {}
+                    try {
+                        const resStatic = await fetch(staticPath);
+                        if (resStatic.ok) return await resStatic.json();
+                    } catch(e) {}
+                    return [];
+                }
+
+                const [pros, baseWeapons] = await Promise.all([
+                    fetchWithFallback('/api/public-pros', 'data/pros.json'),
+                    fetchWithFallback('/api/base-weapons', 'data/base_weapons.json')
+                ]);
+
+                // 2. Encontrar os Loadouts do Criador
+                const creatorDocs = pros.filter(p => p.proHandle && p.proHandle.toLowerCase().replace(/[@\/]/g, '') === handleParam.toLowerCase());
+
+                if (creatorDocs.length === 0) {
+                    container.innerHTML = '<div style="color:#ff3333; margin-top:50px;">Criador não encontrado.</div>';
+                    return;
+                }
+
+                // Usa as informações do primeiro documento para montar o perfil
+                const creatorProfile = creatorDocs[0];
+
+                // 3. Update Theme Color se houver foto ou deixar padrão
+                if (creatorProfile.photoUrl) {
+                    document.getElementById('pageBackground').style.backgroundImage = `linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(5,10,18,0.98) 100%), url('${creatorProfile.photoUrl}')`;
+                }
+
+                // 4. Montar o Cabeçalho
+                document.title = `Loadouts de ${creatorProfile.proName}`;
+                
+                let html = `
+                    <div class="profile-header">
+                        <img src="${creatorProfile.photoUrl || 'https://via.placeholder.com/150'}" alt="${creatorProfile.proName}" class="profile-avatar">
+                        <h1 class="profile-handle">@${creatorProfile.proHandle.replace(/[@\/]/g, '')}</h1>
+                        <p class="profile-bio">Explore todas as <span>classes exclusivas</span> usadas por ${creatorProfile.proName}.</p>
+                    </div>
+                    <div class="links-list" id="linksList">
+                `;
+
+                // 5. Montar as Armas
+                const weapons = creatorDocs;
+                
+                if (weapons.length === 0) {
+                    html += `<div style="text-align:center; color:#888; font-size:14px; margin-top:20px;">Nenhum loadout cadastrado.</div>`;
+                } else {
+                    weapons.forEach((w, index) => {
+                        const baseW = baseWeapons.find(b => b.id === w.baseWeaponId) || {};
+                        const imgSrc = w.image || baseW.image || 'https://via.placeholder.com/300x150/161b22/8b949e?text=Sem+Imagem';
+                        const wName = w.name || w.weaponName || baseW.name || 'Arma';
+                        
+                        // Custom Category / Playstyle
+                        const category = w.playstyle || baseW.category || 'META';
+
+                        let attachmentsHtml = '';
+                        if (w.attachments) {
+                            for (const [slot, item] of Object.entries(w.attachments)) {
+                                let itemName = '';
+                                if (typeof item === 'string') itemName = item;
+                                else if (item && typeof item === 'object') itemName = item.name;
+                                
+                                if (itemName && itemName.trim() !== '') {
+                                    attachmentsHtml += `
+                                        <div class="attachment-item">
+                                            <span class="attachment-type">${slot}</span>
+                                            <span class="attachment-name">${itemName}</span>
+                                        </div>
+                                    `;
+                                }
+                            }
+                        }
+
+                        const codeHtml = w.code ? `
+                            <button class="copy-code-btn" onclick="copyCode(event, '${w.code}', this)">
+                                📋 COPIAR CÓDIGO DA CLASSE
+                            </button>
+                        ` : '';
+
+                        html += `
+                            <div class="weapon-card" style="animation-delay: ${index * 0.08}s">
+                                <div class="weapon-header" onclick="toggleCard(this)">
+                                    <img src="${imgSrc}" class="weapon-thumb">
+                                    <div class="weapon-title-area">
+                                        <h3 class="weapon-name">${wName}</h3>
+                                        <span class="weapon-category">${category}</span>
+                                    </div>
+                                    <div class="expand-icon">▼</div>
+                                </div>
+                                <div class="weapon-body">
+                                    <div class="attachments-list">
+                                        ${attachmentsHtml}
+                                        ${codeHtml}
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+
+                html += `
+                    </div>
+                    <a href="/" class="linktree-footer">
+                        WARZONE BR <span>METAS</span>
+                    </a>
+                `;
+
+                container.innerHTML = html;
+
+            } catch (err) {
+                console.error(err);
+                container.innerHTML = '<div style="color:#ff3333; margin-top:50px;">Erro ao carregar dados.</div>';
+            }
+        });
+
+        // Toggle Accordion
+        window.toggleCard = function(headerElement) {
+            const card = headerElement.closest('.weapon-card');
+            
+            // Fechar os outros cards (opcional, estilo linktree geralmente abre um de cada vez)
+            document.querySelectorAll('.weapon-card.active').forEach(c => {
+                if (c !== card) c.classList.remove('active');
+            });
+
+            card.classList.toggle('active');
+        };
+
+        // Copiar Código
+        window.copyCode = function(event, code, btn) {
+            event.stopPropagation(); // Evita que o clique feche a sanfona
+            navigator.clipboard.writeText(code).then(() => {
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '✅ CÓDIGO COPIADO!';
+                btn.style.background = '#3fb950';
+                btn.style.color = '#000';
+                btn.style.borderColor = '#3fb950';
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.style.background = '';
+                    btn.style.color = '';
+                    btn.style.borderColor = '';
+                }, 2000);
+            }).catch(e => {
+                alert("Erro ao copiar: " + e);
+            });
+        };
+    </script>
+</body>
+</html>

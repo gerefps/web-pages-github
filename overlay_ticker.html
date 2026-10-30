@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Ticker de Armas</title>
+    <link rel="stylesheet" href="style.css?v=2">
+    <style>
+        body {
+            background: transparent;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        .ticker-wrapper {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100vw;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background: rgba(5, 12, 25, 0.85);
+            border-top: 2px solid rgba(0, 210, 255, 0.3);
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.6);
+        }
+
+        .ticker-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -15px; left: -15px; right: -15px; bottom: -15px;
+            background: url('fundo_app.jpg') center/cover no-repeat;
+            filter: blur(12px);
+            opacity: 0.7;
+            z-index: -2;
+        }
+
+        .ticker-wrapper::after {
+            content: '';
+            position: absolute;
+            top: -15px; left: -15px; right: -15px; bottom: -15px;
+            background: var(--brand-color, #00d2ff);
+            mix-blend-mode: color;
+            opacity: 0.7;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .ticker-content {
+            display: flex;
+            white-space: nowrap;
+            align-items: center;
+            width: max-content;
+        }
+
+        .ticker-item {
+            display: flex;
+            align-items: center;
+            padding: 0 40px;
+            font-family: 'Inter', sans-serif;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        .ticker-weapon {
+            font-family: 'Teko', sans-serif;
+            font-size: 2.2rem;
+            color: var(--neon-blue);
+            font-weight: 700;
+            margin-right: 20px;
+            text-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
+            line-height: 1;
+            transform: translateY(3px); /* Teko font alignment adjustment */
+        }
+
+        .ticker-code {
+            color: #ccc;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            background: rgba(0,0,0,0.5);
+            padding: 4px 15px;
+            border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.15);
+            display: flex;
+            align-items: center;
+        }
+
+        .ticker-separator {
+            color: rgba(255,255,255,0.15);
+            margin-left: 40px;
+            font-size: 1.5rem;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+    </style>
+</head>
+<body>
+    <div class="ticker-wrapper" id="tickerWrapper">
+        <div class="ticker-content" id="tickerContent">
+            <!-- Items injected by JS -->
+        </div>
+    </div>
+    <script src="overlay_ticker.js"></script>
+</body>
+</html>

@@ -1,0 +1,1810 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WARZONE BR METAS — Ranking de Loadouts Competitivos</title>
+    <meta name="description" content="Ranking atualizado dos melhores loadouts competitivos do Warzone. Classes otimizadas para longo alcance, curto alcance e snipers. Criado por especialistas.">
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#050a12">
+    <link rel="stylesheet" href="style.css?v=2">
+    <link href='fonts.css' rel='stylesheet'>
+    <!-- Firebase SDK Compat (defer for instant non-blocking render) -->
+    <script defer src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
+    <script defer src="auth.js?v=3"></script>
+    <style>
+        /* ===== RESET & BASE ===== */
+        body {
+            font-family: 'Outfit', sans-serif;
+            color: #c9d1d9;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            position: relative;
+            background: #050a12;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(rgba(11, 14, 19, 0.8), rgba(11, 14, 19, 0.8)), url('fundo_app.jpg') center 20% / cover no-repeat fixed;
+            z-index: -2;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: var(--brand-color, #00d2ff);
+            mix-blend-mode: color;
+            opacity: 0.08;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* ===== NAVBAR ===== */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 30px;
+            background: rgba(12, 15, 20, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .top-nav .brand {
+            font-family: 'Teko', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: #fff;
+            text-transform: uppercase;
+            text-decoration: none;
+            letter-spacing: 1px;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .top-nav .brand span {
+            color: #00d2ff;
+            text-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
+        }
+
+        .top-nav .nav-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .nav-link-item {
+            color: #8b949e;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 8px 14px;
+            border-radius: 6px;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .nav-link-item:hover {
+            color: #fff;
+            background: rgba(255,255,255,0.06);
+        }
+
+        .btn-criar-meta {
+            display: none;
+            background: linear-gradient(135deg, #00d2ff 0%, #0095b3 100%);
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+            transition: all 0.2s;
+            width: 100%;
+            text-align: center;
+            font-family: var(--font-mono);
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(0, 210, 255, 0.2);
+        }
+
+        body.user-is-pro .btn-criar-meta {
+            display: block;
+        }
+
+        .btn-login {
+            background: linear-gradient(135deg, #00d2ff 0%, #0095b3 100%);
+            color: #000;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 13px;
+            transition: all 0.2s;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-login:hover {
+            filter: brightness(1.15);
+            box-shadow: 0 4px 15px rgba(0, 210, 255, 0.3);
+        }
+
+        .btn-support {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: #fff;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 13px;
+            transition: all 0.2s;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-support:hover {
+            filter: brightness(1.15);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+            transform: translateY(-1px);
+        }
+
+        /* Modal LivePix */
+        .livepix-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .livepix-content {
+            background: rgba(10, 15, 25, 0.95);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5), inset 0 0 40px rgba(16, 185, 129, 0.05);
+            position: relative;
+        }
+
+        .livepix-content h2 {
+            color: #fff;
+            font-family: 'Teko', sans-serif;
+            font-size: 32px;
+            margin: 0 0 10px 0;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .livepix-content h2 span {
+            color: #10b981;
+        }
+
+        .livepix-content p {
+            color: #8b949e;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .close-livepix {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: transparent;
+            border: none;
+            color: #8b949e;
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .close-livepix:hover {
+            color: #fff;
+        }
+
+        /* ===== PAGE LAYOUT ===== */
+        .page-layout {
+            display: flex;
+            max-width: 98%;
+            margin: 0 auto;
+            padding: 0;
+            min-height: calc(100vh - 56px);
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            width: 280px;
+            min-width: 280px;
+            padding: 24px 16px;
+            border-right: 1px solid rgba(0, 210, 255, 0.12);
+            background: rgba(5, 8, 17, 0.55);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            position: sticky;
+            top: 56px;
+            height: calc(100vh - 56px);
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--brand-color) transparent;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar::-webkit-scrollbar { width: 4px; }
+        .sidebar::-webkit-scrollbar-thumb { background: var(--brand-color); border-radius: 4px; }
+
+        .sidebar-section {
+            margin-bottom: 28px;
+        }
+
+        .sidebar-section-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: #6e7681;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 0 12px;
+            margin-bottom: 12px;
+            font-family: var(--font-mono);
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            border-radius: 4px;
+            color: #b1bac4;
+            text-decoration: none;
+            font-size: 13.5px;
+            font-weight: 500;
+            font-family: var(--font-mono);
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            position: relative;
+        }
+
+        .sidebar-link:hover {
+            background: rgba(0, 210, 255, 0.04);
+            color: #fff;
+        }
+
+        .sidebar-link.active {
+            background: rgba(0, 210, 255, 0.08);
+            color: #00d2ff;
+            font-weight: 700;
+            border-left: 3px solid #00d2ff;
+            box-shadow: 0 0 10px rgba(0, 210, 255, 0.15);
+        }
+
+        .sidebar-link.active::before {
+            display: none; /* Removed generic left bar */
+        }
+
+        .sidebar-icon {
+            font-size: 15px;
+            width: 20px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .sidebar-badge {
+            margin-left: auto;
+            background: rgba(0, 210, 255, 0.12);
+            color: #00d2ff;
+            font-size: 10px;
+            font-family: var(--font-mono);
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            border: 1px solid rgba(0, 210, 255, 0.2);
+        }
+
+        .sidebar-divider {
+            height: 1px;
+            background: rgba(0, 210, 255, 0.1);
+            margin: 16px 12px;
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .main-content {
+            flex: 1;
+            padding: 30px 36px 60px 36px;
+            min-width: 0;
+        }
+
+        /* ===== PAGE HEADER ===== */
+        .page-header {
+            margin-bottom: 28px;
+        }
+
+        .page-header h1 {
+            font-family: 'Teko', sans-serif;
+            font-size: 38px;
+            font-weight: 700;
+            color: #fff;
+            margin: 0 0 8px 0;
+            line-height: 1.1;
+            text-transform: uppercase;
+        }
+
+        .page-header h1 span {
+            color: #00d2ff;
+        }
+
+        .page-header p {
+            color: #6e7681;
+            font-size: 14px;
+            margin: 0 0 12px 0;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .last-updated {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: #3fb950;
+            font-weight: 600;
+        }
+
+        .last-updated::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: #3fb950;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        /* ===== HEADER ROW & GAME SELECTOR ===== */
+        .header-meta-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .game-selector-container {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(13, 17, 23, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 3px;
+            gap: 4px;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .game-tab-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 12px;
+            border-radius: 6px;
+            background: transparent;
+            border: 1px solid transparent;
+            color: #8b949e;
+            font-size: 11px;
+            font-weight: 700;
+            font-family: var(--font-mono);
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            text-transform: uppercase;
+        }
+
+        .game-tab-btn:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .game-tab-btn.active[data-game="ALL"] {
+            background: rgba(0, 210, 255, 0.12);
+            border-color: rgba(0, 210, 255, 0.4);
+            color: #00d2ff;
+            box-shadow: 0 0 12px rgba(0, 210, 255, 0.2);
+        }
+
+        .game-tab-btn.active[data-game="BO7"] {
+            background: rgba(255, 119, 0, 0.14);
+            border-color: rgba(255, 119, 0, 0.5);
+            color: #ff8c1a;
+            box-shadow: 0 0 12px rgba(255, 119, 0, 0.25);
+        }
+
+        .game-tab-btn.active[data-game="MW4"] {
+            background: rgba(16, 185, 129, 0.14);
+            border-color: rgba(16, 185, 129, 0.5);
+            color: #34d399;
+            box-shadow: 0 0 12px rgba(16, 185, 129, 0.25);
+        }
+
+        .game-tab-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: currentColor;
+            display: inline-block;
+        }
+
+        /* ===== GAME BADGES ON WEAPON CARDS ===== */
+        .game-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 800;
+            font-family: var(--font-mono);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            line-height: 1;
+        }
+        .game-badge-bo7 {
+            background: rgba(255, 119, 0, 0.12);
+            border: 1px solid rgba(255, 119, 0, 0.4);
+            color: #ff8c1a;
+        }
+        .game-badge-mw4 {
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            color: #34d399;
+        }
+
+        /* ===== FILTER PILLS ===== */
+        .filters-container {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            scrollbar-width: none;
+        }
+
+        .filters-container::-webkit-scrollbar { display: none; }
+
+        .filter-btn {
+            background-color: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #8b949e;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            font-family: var(--font-mono);
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover {
+            background-color: rgba(255,255,255,0.06);
+            color: #fff;
+            border-color: rgba(255,255,255,0.15);
+        }
+
+        .filter-btn.active {
+            background-color: rgba(0, 210, 255, 0.1);
+            color: #00d2ff;
+            border-color: #00d2ff;
+            box-shadow: 0 0 10px rgba(0, 210, 255, 0.2);
+        }
+
+        .filter-btn-pro {
+            color: #00d2ff;
+            border-color: rgba(0, 210, 255, 0.3);
+        }
+
+        .filter-btn-pro:hover {
+            background-color: rgba(0, 210, 255, 0.08);
+        }
+
+        .filter-btn-pro.active {
+            background-color: rgba(0, 210, 255, 0.1) !important;
+            color: #00d2ff !important;
+            border-color: #00d2ff !important;
+        }
+
+        /* ===== SECTION TITLE ===== */
+        .section-title {
+            color: #6e7681;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 16px;
+            font-weight: 700;
+            font-family: var(--font-mono);
+        }
+
+        /* ===== WEAPON LIST ===== */
+        .weapons-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* ===== WEAPON ACCORDION CARD ===== */
+        .weapon-accordion {
+            background: linear-gradient(135deg, rgba(16, 22, 38, 0.7) 0%, rgba(6, 12, 26, 0.8) 100%);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-left: 4px solid var(--dynamic-color, #00d2ff);
+            border-radius: 8px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-right: 1px solid rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .weapon-accordion:hover {
+            background: linear-gradient(135deg, rgba(20, 28, 48, 0.8) 0%, rgba(10, 16, 32, 0.9) 100%);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.6), 0 0 20px var(--dynamic-color-glow, rgba(0, 210, 255, 0.2));
+            transform: translateY(-2px);
+        }
+
+        /* Thumb glow wrapper */
+        .weapon-thumb-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100px;
+            height: 56px;
+            flex-shrink: 0;
+            overflow: visible;
+        }
+
+        .weapon-thumb-glow {
+            position: absolute;
+            width: 60px;
+            height: 35px;
+            border-radius: 50%;
+            filter: blur(25px);
+            opacity: 0.15;
+            z-index: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .weapon-accordion:hover .weapon-thumb-glow {
+            opacity: 0.45;
+            transform: scale(1.3);
+        }
+
+        .weapon-thumb {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Weapon header */
+        .weapon-header-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 20px;
+            cursor: pointer;
+            user-select: none;
+            gap: 16px;
+        }
+
+        .weapon-header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            min-width: 0;
+            flex: 1;
+        }
+
+        .weapon-thumb {
+            width: 100px;
+            height: 56px;
+            object-fit: contain;
+            flex-shrink: 0;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+            opacity: 0.9;
+        }
+
+        .weapon-header-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            min-width: 0;
+            flex-wrap: wrap;
+        }
+
+        .weapon-header-info h2 {
+            font-family: 'Teko', sans-serif;
+            font-size: 34px;
+            color: #fff;
+            margin: 0;
+            line-height: 1;
+            text-transform: uppercase;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .weapon-category-label {
+            color: #6e7681;
+            font-size: 11px;
+            font-family: var(--font-mono);
+            font-weight: 500;
+            white-space: nowrap;
+            text-transform: uppercase;
+        }
+
+        /* Tags */
+        .meta-tags {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            font-size: 10px;
+            font-family: var(--font-mono);
+            font-weight: 600;
+            flex-wrap: wrap;
+        }
+
+        .tag-playstyle {
+            padding: 5px 10px;
+            border-radius: 6px;
+            white-space: nowrap;
+            line-height: 1.2;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 9.5px;
+            font-weight: 800;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        /* Color-coded playstyle tags */
+        .tag-longo {
+            background: rgba(0, 210, 255, 0.1);
+            color: #00d2ff;
+            border: 1px solid rgba(0, 210, 255, 0.2);
+        }
+
+        .tag-curto {
+            background: rgba(255, 42, 157, 0.1);
+            color: #ff2a9d;
+            border: 1px solid rgba(255, 42, 157, 0.2);
+        }
+
+        .tag-sniper {
+            background: rgba(255, 51, 51, 0.1);
+            color: #ff3333;
+            border: 1px solid rgba(255, 51, 51, 0.2);
+        }
+
+        .tag-suporte {
+            background: rgba(168, 85, 247, 0.1);
+            color: #a855f7;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+        }
+
+        .tag-meta {
+            background: rgba(255, 170, 0, 0.12);
+            color: #ffaa00;
+            border: 1px solid rgba(255, 170, 0, 0.25);
+        }
+
+        .tag-semi {
+            background: rgba(52, 211, 153, 0.1);
+            color: #34d399;
+            border: 1px solid rgba(52, 211, 153, 0.2);
+        }
+
+        .tag-secundario {
+            background: rgba(156, 163, 175, 0.1);
+            color: #9ca3af;
+            border: 1px solid rgba(156, 163, 175, 0.2);
+        }
+
+        /* Weapon code in header */
+        .weapon-code-pill {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 210, 255, 0.1);
+            border: 1px solid rgba(0, 210, 255, 0.25);
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 600;
+            color: #00d2ff;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+            white-space: nowrap;
+            box-shadow: 0 2px 10px rgba(0, 210, 255, 0.1);
+        }
+
+        .weapon-code-pill:hover {
+            background: rgba(0, 210, 255, 0.18);
+            border-color: rgba(0, 210, 255, 0.5);
+            box-shadow: 0 4px 15px rgba(0, 210, 255, 0.25);
+            transform: translateY(-1px);
+        }
+
+        .weapon-code-pill .copy-icon {
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
+        .weapon-code-pill.copied {
+            background: rgba(63, 185, 80, 0.2);
+            border-color: #3fb950;
+            color: #3fb950;
+            box-shadow: 0 0 15px rgba(63, 185, 80, 0.4);
+            transform: scale(1.02);
+        }
+
+        /* Header right side */
+        .weapon-header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+
+        .accordion-arrow {
+            color: #6e7681;
+            font-size: 14px;
+            transition: transform 0.3s;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+        }
+
+        .weapon-accordion.open .accordion-arrow {
+            transform: rotate(180deg);
+        }
+
+        /* Accordion body */
+        .accordion-body {
+            display: none;
+            padding: 0 20px 20px 20px;
+            border-top: 1px solid rgba(255,255,255,0.04);
+            background: rgba(8, 12, 18, 0.4);
+        }
+
+        .weapon-accordion.open .accordion-body {
+            display: flex;
+            gap: 24px;
+            padding-top: 20px;
+        }
+
+        /* Attachments grid */
+        .attachments-grid {
+            flex: 2;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            align-content: start;
+        }
+
+        .attachment-pill {
+            background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0.2) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 14.5px;
+            font-family: var(--font-mono);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+        }
+
+        .attachment-pill:hover {
+            border-color: var(--dynamic-color, #00d2ff);
+            background: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(0,0,0,0.3) 100%);
+            box-shadow: 0 0 15px var(--dynamic-color-glow, rgba(0, 210, 255, 0.15)), inset 0 1px 0 rgba(255,255,255,0.1);
+            transform: translateY(-1px);
+        }
+
+        .attachment-pill span {
+            color: var(--dynamic-color, #00d2ff);
+            font-size: 10px;
+            text-transform: uppercase;
+            font-weight: 800;
+            letter-spacing: 1px;
+            font-family: var(--font-mono);
+        }
+
+        /* Weapon image area */
+        .weapon-image {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .weapon-image img {
+            max-width: 100%;
+            max-height: 140px;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5));
+        }
+
+        .btn-criar-meta {
+            background: linear-gradient(135deg, #00d2ff 0%, #0095b3 100%);
+            color: #000;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 210, 255, 0.2);
+            transition: all 0.2s;
+            display: none;
+        }
+
+        body.user-is-pro .btn-criar-meta {
+            display: block;
+        }
+
+        .btn-criar-meta:hover {
+            filter: brightness(1.1);
+            box-shadow: 0 6px 20px rgba(0, 210, 255, 0.35);
+            transform: translateY(-1px);
+        }
+
+        /* ===== PRO CREATOR CARD ===== */
+        .pro-creator-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .pro-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center top;
+            border: 2px solid #00d2ff;
+            box-shadow: 0 0 12px rgba(0, 210, 255, 0.3);
+            flex-shrink: 0;
+        }
+
+        .pro-name-block {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .pro-name-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: #00d2ff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ===== EMPTY STATE ===== */
+        .empty-state {
+            color: #6e7681;
+            text-align: center;
+            padding: 60px 20px;
+            font-size: 15px;
+        }
+
+        .loading-state {
+            color: #6e7681;
+            text-align: center;
+            padding: 60px 20px;
+            font-size: 14px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .sidebar {
+                display: none;
+            }
+            .main-content {
+                padding: 24px 20px 40px 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .filters-container {
+                flex-wrap: wrap;
+                justify-content: center;
+                overflow-x: visible;
+                padding-bottom: 0;
+            }
+            .top-nav {
+                padding: 10px 12px;
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+            .top-nav .brand {
+                font-size: 20px;
+                flex-wrap: wrap;
+                line-height: 1.1;
+                width: 100%;
+                justify-content: center;
+            }
+            .top-nav .nav-actions {
+                gap: 8px;
+                width: 100%;
+                overflow-x: auto;
+                justify-content: flex-start;
+                padding-bottom: 5px;
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+            .top-nav .nav-actions::-webkit-scrollbar {
+                display: none;
+            }
+            .btn-support {
+                padding: 6px 10px;
+                font-size: 11px;
+                text-align: center;
+                line-height: 1.2;
+            }
+            .btn-login {
+                padding: 6px 10px;
+                font-size: 11px;
+            }
+            .nav-link-item {
+                display: inline-block;
+                padding: 6px 10px;
+                font-size: 11px;
+            }
+            .page-header h1 {
+                font-size: 26px;
+            }
+            .weapon-header-btn {
+                flex-wrap: wrap;
+                padding: 12px 14px;
+                position: relative;
+            }
+            .weapon-header-left {
+                align-items: center;
+                flex-direction: row;
+                gap: 12px;
+                width: 100%;
+                padding-right: 24px;
+            }
+            .weapon-header-info {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+                width: 100%;
+            }
+            .weapon-header-info h2 {
+                font-size: 24px;
+                white-space: normal;
+                word-break: break-word;
+            }
+            .meta-tags {
+                gap: 6px;
+                flex-wrap: wrap;
+            }
+            .tag-playstyle {
+                padding: 4px 8px;
+                font-size: 9px;
+            }
+            .weapon-header-right {
+                width: 100%;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                gap: 8px;
+                margin-top: 8px;
+                padding-left: 72px;
+            }
+            .accordion-arrow {
+                position: absolute;
+                top: 20px;
+                right: 14px;
+            }
+            .weapon-thumb-wrapper {
+                width: 60px;
+                height: 35px;
+                margin-right: 0px;
+            }
+            .weapon-thumb {
+                width: 60px;
+                height: 35px;
+                display: block;
+            }
+            .weapon-accordion.open .accordion-body {
+                flex-direction: column-reverse;
+                padding: 0 12px 16px 12px;
+                gap: 16px;
+            }
+            .attachments-grid {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            .attachment-pill {
+                padding: 10px 14px;
+                font-size: 13px;
+                word-break: normal;
+                overflow-wrap: break-word;
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+            }
+            .attachment-pill span {
+                font-size: 10px;
+                letter-spacing: 0.5px;
+            }
+            .weapon-image {
+                margin-top: 10px;
+            }
+            .weapon-image img {
+                max-height: 160px;
+            }
+            .weapon-code-pill {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="top-nav">
+        <a href="/" class="brand">WARZONE BR <span>METAS</span></a>
+        <div class="nav-actions">
+            <a href="/admin.html" class="nav-link-item" id="nav-admin" style="display: none;">Meu Painel</a>
+            <a href="/instagram.html" class="nav-link-item" id="nav-gerador" style="display: none;">Gerador de Posts</a>
+            <a href="/admin_weapons.html" class="nav-link-item master-only" style="display: none;">Banco de Armas</a>
+            <a href="/admin_overlays.html" class="nav-link-item master-only" style="display: none;">Overlays</a>
+            <button class="btn-support" onclick="document.getElementById('livepixModal').style.display='flex'">☕ Apoie o Projeto</button>
+            <a href="/login.html" id="nav-login-btn" class="btn-login">LOGIN</a>
+        </div>
+    </nav>
+
+    <div class="page-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">Ranking de Loadouts</div>
+                <button class="sidebar-link active" data-filter="All">
+                    <span class="sidebar-icon">🎯</span> Todos
+                </button>
+                <button class="sidebar-link" data-filter="Meta Absoluto">
+                    <span class="sidebar-icon">👑</span> Meta Absoluto
+                    <span class="sidebar-badge" id="badge-meta"></span>
+                </button>
+                <button class="sidebar-link" data-filter="Longo Alcance">
+                    <span class="sidebar-icon">🔭</span> Longo Alcance
+                </button>
+                <button class="sidebar-link" data-filter="Curto Alcance">
+                    <span class="sidebar-icon">⚡</span> Curto Alcance
+                </button>
+                <button class="sidebar-link" data-filter="Atirador de Elite">
+                    <span class="sidebar-icon">🎯</span> Atirador de Elite
+                </button>
+                <button class="sidebar-link" data-filter="Fuzil de Atirador">
+                    <span class="sidebar-icon">🛡️</span> Fuzil de Atirador
+                </button>
+            </div>
+
+            <div class="sidebar-divider"></div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">Criadores</div>
+                <button class="sidebar-link" data-filter="PRO">
+                    <span class="sidebar-icon">⭐</span> Criadores PRO
+                </button>
+            </div>
+
+
+            
+            <div class="sidebar-section" style="text-align: center; margin-top: 5px; padding-bottom: 20px;">
+                <p style="color: #6e7681; font-size: 12px; margin: 0;">Criado com ❤️ por <strong style="color: var(--brand-color);">Gerefps</strong></p>
+                <p style="color: #484f58; font-size: 11px; margin: 4px 0 12px 0;">Ferramenta independente da comunidade.</p>
+                <a href="https://www.instagram.com/gerefps_/" target="_blank" style="display: inline-block; padding: 6px 12px; background: rgba(0, 240, 255, 0.05); border: 1px solid rgba(0, 240, 255, 0.3); color: var(--brand-color); text-decoration: none; border-radius: 4px; font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; transition: all 0.2s; box-shadow: 0 0 10px rgba(0,240,255,0.05);" onmouseover="this.style.background='rgba(0, 240, 255, 0.15)'; this.style.borderColor='var(--brand-color)';" onmouseout="this.style.background='rgba(0, 240, 255, 0.05)'; this.style.borderColor='rgba(0, 240, 255, 0.3)';">Conheça Gerefps</a>
+                <button id="pix-btn" onclick="
+                    navigator.clipboard.writeText('mathgerelima@gmail.com').then(() => {
+                        const btn = document.getElementById('pix-btn');
+                        const orig = btn.innerHTML;
+                        btn.innerHTML = '✅ Chave Pix copiada!';
+                        btn.style.background = 'rgba(63, 185, 80, 0.15)';
+                        btn.style.borderColor = '#3fb950';
+                        btn.style.color = '#3fb950';
+                        setTimeout(() => {
+                            btn.innerHTML = orig;
+                            btn.style.background = 'rgba(34, 197, 94, 0.05)';
+                            btn.style.borderColor = 'rgba(34, 197, 94, 0.3)';
+                            btn.style.color = '#22c55e';
+                        }, 3000);
+                    });
+                " style="display: inline-block; margin-top: 8px; padding: 6px 12px; background: rgba(34, 197, 94, 0.05); border: 1px solid rgba(34, 197, 94, 0.3); color: #22c55e; border-radius: 4px; font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; transition: all 0.2s; cursor: pointer; font-family: 'Outfit', sans-serif; box-shadow: 0 0 10px rgba(34,197,94,0.05);" onmouseover="this.style.background='rgba(34, 197, 94, 0.15)'; this.style.borderColor='#22c55e';" onmouseout="this.style.background='rgba(34, 197, 94, 0.05)'; this.style.borderColor='rgba(34, 197, 94, 0.3)';">💚 Apoie via Pix</button>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <div class="page-header">
+                <h1>Ranking de Loadouts — <span>As Melhores Classes</span></h1>
+                <p>Confira os loadouts mais eficientes para o competitivo. Cada classe é testada e otimizada por especialistas para garantir o melhor desempenho em combates de todas as distâncias.</p>
+                <div class="header-meta-row">
+                    <div class="last-updated" id="lastUpdated">Atualizado recentemente</div>
+                    <div class="game-selector-container" id="gameSelector">
+                        <button class="game-tab-btn active" data-game="ALL" title="Ver todas as armas">
+                            <span class="game-tab-dot"></span> TODAS
+                        </button>
+                        <button class="game-tab-btn" data-game="BO7" title="Filtrar por Black Ops 7">
+                            <span class="game-tab-dot"></span> BLACK OPS 7
+                        </button>
+                        <button class="game-tab-btn" data-game="MW4" title="Filtrar por Modern Warfare 4">
+                            <span class="game-tab-dot"></span> MODERN WARFARE 4
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile-only filter pills (sidebar hidden on mobile) -->
+            <div class="filters-container" id="filters">
+                <button class="filter-btn active" data-filter="All">Todos</button>
+                <button class="filter-btn" data-filter="Meta Absoluto">Meta Absoluto</button>
+                <button class="filter-btn" data-filter="Longo Alcance">Longo Alcance</button>
+                <button class="filter-btn" data-filter="Curto Alcance">Curto Alcance</button>
+                <button class="filter-btn" data-filter="Atirador de Elite">Atirador de Elite</button>
+                <button class="filter-btn" data-filter="Fuzil de Atirador">Fuzil de Atirador</button>
+                <button class="filter-btn filter-btn-pro" data-filter="PRO">Criadores PRO</button>
+            </div>
+
+            <!-- Meta Update Banner -->
+            <div id="meta-banner" style="display:none; background: linear-gradient(90deg, rgba(0,240,255,0.08) 0%, rgba(0,210,255,0.04) 100%); border: 1px solid rgba(0,240,255,0.25); border-radius: 8px; padding: 12px 20px; margin-bottom: 16px; display: none; align-items: center; justify-content: space-between; gap: 12px; animation: pulse-border 2s infinite;">
+                <span style="color: #00d2ff; font-size: 13px; font-weight: 700; letter-spacing: 0.5px;">⚡ META ATUALIZADA HOJE! Confira as classes mais recentes.</span>
+                <button onclick="document.getElementById('meta-banner').style.display='none'" style="background: none; border: none; color: #6e7681; cursor: pointer; font-size: 18px; line-height: 1; padding: 0;">×</button>
+            </div>
+
+            <h3 class="section-title" id="section-title">TODAS AS ARMAS</h3>
+            
+            <div class="weapons-list" id="weapons-list">
+                <div class="loading-state">Carregando loadouts...</div>
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            await window.authReadyPromise;
+
+            let allWeapons = [];
+            let baseWeaponsList = [];
+            let allPros = [];
+            let currentGame = 'ALL';
+            let currentFilter = 'All';
+
+            // Initialize Firestore for engagement tracking safely
+            let db = null;
+            try {
+                if (typeof firebase !== 'undefined' && firebase.apps && firebase.apps.length) {
+                    db = firebase.firestore();
+                }
+            } catch(e) {
+                console.warn('Firestore client initialization skipped:', e);
+            }
+
+            // === VOTE SYSTEM ===
+            function hasVoted(weaponId) {
+                return localStorage.getItem('voted_' + weaponId) === '1';
+            }
+
+            function voteOnWeapon(weaponId, btnEl) {
+                if (hasVoted(weaponId)) return;
+                if (db) {
+                    db.collection('weapons').doc(weaponId).update({
+                        votos: firebase.firestore.FieldValue.increment(1)
+                    }).catch(e => console.warn('Voto não registrado:', e));
+                }
+                localStorage.setItem('voted_' + weaponId, '1');
+                btnEl.innerHTML = '✅ Aprovado!';
+                btnEl.disabled = true;
+                btnEl.style.background = 'rgba(63, 185, 80, 0.15)';
+                btnEl.style.borderColor = '#3fb950';
+                btnEl.style.color = '#3fb950';
+                // Update counter
+                const counter = btnEl.parentElement.querySelector('.vote-counter');
+                if (counter) {
+                    const cur = parseInt(counter.textContent) || 0;
+                    counter.textContent = cur + 1;
+                }
+            }
+
+            // === VIEW TRACKER ===
+            function trackView(weaponId) {
+                if (db) {
+                    db.collection('weapons').doc(weaponId).update({
+                        views: firebase.firestore.FieldValue.increment(1)
+                    }).catch(e => console.warn('View não registrada:', e));
+                }
+            }
+
+            try {
+                async function fetchWithFallback(apiPath, staticPath) {
+                    try {
+                        const res = await fetch(apiPath);
+                        if (res.ok) {
+                            const data = await res.json();
+                            if (Array.isArray(data) && data.length > 0) return data;
+                        }
+                    } catch(e) {}
+                    try {
+                        const resStatic = await fetch(staticPath);
+                        if (resStatic.ok) {
+                            const dataStatic = await resStatic.json();
+                            if (Array.isArray(dataStatic) && dataStatic.length > 0) return dataStatic;
+                        }
+                    } catch(e) {}
+                    return [];
+                }
+
+            const [baseRes, pubRes, proRes] = await Promise.all([
+                fetchWithFallback('/api/base-weapons', 'data/base_weapons.json'),
+                fetchWithFallback('/api/public-weapons', 'data/weapons.json'),
+                fetchWithFallback('/api/public-pros', 'data/pros.json')
+            ]);
+
+            baseWeaponsList = baseRes;
+            allWeapons = pubRes;
+            allPros = proRes;
+
+                // Sort weapons by votes descending
+                allWeapons.sort((a, b) => (b.votos || 0) - (a.votos || 0));
+
+                // Set last updated date
+                const now = new Date();
+                const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+                document.getElementById('lastUpdated').textContent = `Atualizado em ${now.toLocaleDateString('pt-BR', options)}`;
+
+                // Set meta count badge
+                const metaCount = allWeapons.filter(w => {
+                    const bw = baseWeaponsList.find(b => b.id === w.baseWeaponId) || {};
+                    return w.absoluteMeta === true || (w.playstyle || bw.playstyle) === 'Meta Absoluto';
+                }).length;
+                const badgeEl = document.getElementById('badge-meta');
+                if (badgeEl && metaCount > 0) badgeEl.textContent = metaCount;
+
+                // Show meta banner if any weapon updated today has absoluteMeta
+                const todayStr = now.toLocaleDateString('pt-BR', options);
+                const hasMetaToday = allWeapons.some(w => {
+                    if (!w.absoluteMeta) return false;
+                    if (!w.updatedAt) return false;
+                    try {
+                        const upd = w.updatedAt._seconds 
+                            ? new Date(w.updatedAt._seconds * 1000)
+                            : new Date(w.updatedAt);
+                        return upd.toLocaleDateString('pt-BR', options) === todayStr;
+                    } catch(e) { return false; }
+                });
+                if (hasMetaToday) {
+                    document.getElementById('meta-banner').style.display = 'flex';
+                }
+
+                renderWeapons('All');
+
+            } catch (err) {
+                console.error("Erro ao carregar meta:", err);
+                document.getElementById('weapons-list').innerHTML = '<div class="empty-state">Erro ao carregar. Atualize a página.</div>';
+            }
+
+            // === TITLE HELPER ===
+            function updateSectionTitle(filterValue) {
+                const sectionTitle = document.getElementById('section-title');
+                if (sectionTitle) {
+                    const titles = {
+                        'All': 'TODAS AS ARMAS',
+                        'Meta Absoluto': 'META ABSOLUTO',
+                        'Longo Alcance': 'LONGO ALCANCE',
+                        'Curto Alcance': 'CURTO ALCANCE',
+                        'Atirador de Elite': 'ATIRADOR DE ELITE',
+                        'Fuzil de Atirador': 'FUZIL DE ATIRADOR',
+                        'PRO': 'CRIADORES PRO'
+                    };
+                    let t = titles[filterValue] || filterValue.toUpperCase();
+                    if (currentGame === 'BO7') t += ' — BLACK OPS 7';
+                    else if (currentGame === 'MW4') t += ' — MODERN WARFARE 4';
+                    sectionTitle.textContent = t;
+                }
+            }
+
+            // === GAME SELECTOR LOGIC (TODAS / BLACK OPS 7 / MODERN WARFARE 4) ===
+            const gameTabs = document.querySelectorAll('.game-tab-btn');
+            gameTabs.forEach(tab => {
+                tab.addEventListener('click', (e) => {
+                    gameTabs.forEach(t => t.classList.remove('active'));
+                    const btn = e.currentTarget;
+                    btn.classList.add('active');
+                    currentGame = btn.dataset.game;
+                    updateSectionTitle(currentFilter);
+                    renderWeapons(currentFilter);
+                });
+            });
+
+            // === FILTER LOGIC (both sidebar + mobile pills) ===
+            function setupFilter(elements) {
+                elements.forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        // Clear all active states
+                        document.querySelectorAll('.sidebar-link').forEach(b => b.classList.remove('active'));
+                        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+
+                        // Find matching elements and activate them
+                        const filterValue = e.currentTarget.dataset.filter;
+                        currentFilter = filterValue;
+                        document.querySelectorAll(`[data-filter="${filterValue}"]`).forEach(el => el.classList.add('active'));
+
+                        updateSectionTitle(currentFilter);
+                        renderWeapons(currentFilter);
+                    });
+                });
+            }
+
+            setupFilter(document.querySelectorAll('.sidebar-link[data-filter]'));
+            setupFilter(document.querySelectorAll('.filter-btn'));
+
+            // === HELPER: Get playstyle tag class ===
+            function getTagClass(playstyle) {
+                const map = {
+                    'Longo Alcance': 'tag-longo',
+                    'Curto Alcance': 'tag-curto',
+                    'Atirador de Elite': 'tag-sniper',
+                    'Fuzil de Atirador': 'tag-suporte',
+                    'Semi-Automático': 'tag-semi',
+                    'Secundário': 'tag-secundario'
+                };
+                return map[playstyle] || 'tag-longo';
+            }
+
+            // === HELPER: Copy code to clipboard ===
+            function copyCode(code, btnEl) {
+                navigator.clipboard.writeText(code).then(() => {
+                    btnEl.classList.add('copied');
+                    const iconEl = btnEl.querySelector('.copy-icon');
+                    const spanText = btnEl.querySelector('span');
+                    
+                    let originalIcon = null;
+                    let originalSpanText = null;
+
+                    if (iconEl) {
+                        originalIcon = iconEl.textContent;
+                        iconEl.textContent = '✓';
+                        btnEl.childNodes.forEach(n => {
+                            if (n.nodeType === 3 && n.textContent.trim().length > 0) {
+                                n.originalText = n.textContent;
+                                n.textContent = ' Copiado!';
+                            }
+                        });
+                    } else if (spanText) {
+                        originalSpanText = spanText.innerHTML;
+                        spanText.innerHTML = 'COPIADO COM SUCESSO! ✓';
+                        spanText.style.color = '#3fb950';
+                    }
+
+                    setTimeout(() => {
+                        btnEl.classList.remove('copied');
+                        if (iconEl) {
+                            iconEl.textContent = originalIcon || '📋';
+                            btnEl.childNodes.forEach(n => {
+                                if (n.nodeType === 3 && n.originalText) {
+                                    n.textContent = n.originalText;
+                                }
+                            });
+                        }
+                        if (spanText && originalSpanText) {
+                            spanText.innerHTML = originalSpanText;
+                            spanText.style.color = '';
+                        }
+                    }, 2000);
+                });
+            }
+
+            // === RENDER WEAPONS ===
+            function renderWeapons(filter) {
+                const list = document.getElementById('weapons-list');
+                list.innerHTML = '';
+
+                // PRO CREATORS
+                if (filter === 'PRO') {
+                    const filteredPros = currentGame === 'ALL'
+                        ? allPros
+                        : allPros.filter(p => (p.game || 'BO7') === currentGame);
+
+                    if (filteredPros.length === 0) {
+                        list.innerHTML = '<div class="empty-state">Nenhum criador encontrado para este filtro.</div>';
+                        return;
+                    }
+
+                    // Group PRO weapons by creator name
+                    const groupedPros = {};
+                    filteredPros.forEach(p => {
+                        const name = p.proName.trim();
+                        if (!groupedPros[name]) {
+                            groupedPros[name] = {
+                                proName: name,
+                                photoUrl: p.photoUrl,
+                                weapons: []
+                            };
+                        }
+                        groupedPros[name].weapons.push(p);
+                    });
+
+                    Object.values(groupedPros).forEach(g => {
+                        let classesHtml = '';
+                        g.weapons.forEach((w, index) => {
+                            let attachmentsHtml = '';
+                            if (w.attachments) {
+                                for (const [slot, item] of Object.entries(w.attachments)) {
+                                    let itemName = '';
+                                    if (typeof item === 'string') itemName = item;
+                                    else if (item && typeof item === 'object') itemName = item.name;
+                                    if (itemName && itemName.trim() !== '') {
+                                        attachmentsHtml += `<div class="attachment-pill"><span>${slot.toUpperCase()}</span> ${itemName}</div>`;
+                                    }
+                                }
+                            }
+
+                            if (w.ttk) {
+                                attachmentsHtml += `<div class="attachment-pill"><span style="color: #ff2a9d;">TTK</span> ${w.ttk}</div>`;
+                            }
+
+                            // Get weapon image from base weapons if not directly available
+                            let imgSrc = w.weaponImage;
+                            if (!imgSrc && w.baseWeaponId) {
+                                const bw = baseWeaponsList.find(b => b.id === w.baseWeaponId);
+                                if (bw && bw.image) imgSrc = bw.image;
+                            }
+                            if (!imgSrc) imgSrc = 'https://via.placeholder.com/300x150/161b22/8b949e?text=Sem+Imagem';
+
+                            const baseW = baseWeaponsList.find(b => b.id === w.baseWeaponId) || {};
+                            const category = baseW.category || 'Arma';
+
+                            // Code pill for inner weapon header
+                            const codePillHtml = w.code 
+                                ? `<div class="weapon-code-pill" data-code="${w.code}" title="Clique para copiar"><span class="copy-icon">📋</span> ${w.code}</div>` 
+                                : '';
+
+                            // Code pill for attachments list
+                            if (w.code) {
+                                attachmentsHtml += `<div class="attachment-pill" style="border-color: rgba(0,210,255,0.15); background: rgba(0,210,255,0.04); cursor:pointer;" data-code="${w.code}">
+                                    <span style="color:#00d2ff;">CÓDIGO DE COMPARTILHAMENTO</span> 
+                                    <div style="font-family: 'Courier New', monospace; font-size: 14px; color: #00d2ff; font-weight: 600;">${w.code}</div>
+                                </div>`;
+                            }
+
+                            const borderTopHtml = index > 0 
+                                ? `border-top: 1px solid rgba(255,255,255,0.06); padding-top: 24px; margin-top: 20px;` 
+                                : '';
+
+                            classesHtml += `
+                                <div class="pro-class-item" style="width: 100%; ${borderTopHtml}">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
+                                        <div style="display: flex; align-items: center; gap: 12px;">
+                                            <h3 style="font-family: 'Teko', sans-serif; font-size: 22px; color: #fff; margin: 0; text-transform: uppercase; letter-spacing: 0.5px;">${w.weaponName}</h3>
+                                            <span class="weapon-category-label">${category}</span> ${(w.game || "BO7").toUpperCase() === "MW4" ? `<span class="game-badge game-badge-mw4">MW4</span>` : `<span class="game-badge game-badge-bo7">BO7</span>`}
+                                        </div>
+                                        ${codePillHtml}
+                                    </div>
+                                    <div class="pro-class-body" style="display: flex; gap: 20px; flex-wrap: wrap;">
+                                        <div class="attachments-grid" style="flex: 2; min-width: 250px;">
+                                            ${attachmentsHtml}
+                                        </div>
+                                        <div class="weapon-image" style="flex: 1; min-width: 180px; display: flex; justify-content: center; align-items: center;">
+                                            <img src="${imgSrc}" alt="${w.weaponName}" style="max-width: 100%; max-height: 120px; object-fit: contain; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x150/161b22/8b949e?text=Arma';">
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        });
+
+                        const row = document.createElement('div');
+                        row.className = 'weapon-accordion';
+                        row.style.setProperty('--dynamic-color', '#00d2ff');
+                        row.style.setProperty('--dynamic-color-glow', '#00d2ff33');
+                        row.innerHTML = `
+                            <div class="weapon-header-btn" style="align-items: center;">
+                                <div class="weapon-header-left" style="align-items: center; width: 100%;">
+                                    <div class="pro-creator-header" style="width: 100%;">
+                                        <img src="${g.photoUrl}" alt="${g.proName}" class="pro-avatar" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=' + encodeURIComponent('${g.proName}') + '&background=00d2ff&color=000&bold=true';">
+                                        <div class="pro-name-block" style="width: 100%; min-width: 0;">
+                                            <div style="display: flex; align-items: center; gap: 8px;">
+                                                <div class="pro-name-label">Criador PRO</div>
+                                                <div class="tag-playstyle tag-longo" style="background: rgba(0, 210, 255, 0.08); border-color: rgba(0, 210, 255, 0.2); padding: 3px 8px; font-size: 9px;">${g.weapons.length} ${g.weapons.length === 1 ? 'Classe' : 'Classes'}</div>
+                                            </div>
+                                            <h2 style="font-size: 26px; white-space: normal; word-break: break-word; line-height: 1.1; margin-top: 2px;">${g.proName}</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="weapon-header-right">
+                                    <div class="accordion-arrow">▼</div>
+                                </div>
+                            </div>
+                            <div class="accordion-body" style="flex-direction: column; gap: 24px;">
+                                <div class="pro-classes-container" style="display: flex; flex-direction: column; gap: 20px; width: 100%;">
+                                    ${classesHtml}
+                                </div>
+                            </div>
+                        `;
+
+                        row.querySelector('.weapon-header-btn').addEventListener('click', (e) => {
+                            if (e.target.closest('.weapon-code-pill')) return;
+                            row.classList.toggle('open');
+                        });
+
+                        // Copy code handlers
+                        row.querySelectorAll('[data-code]').forEach(el => {
+                            el.addEventListener('click', (e) => {
+                                e.stopPropagation();
+                                copyCode(el.dataset.code, el);
+                            });
+                        });
+
+                        list.appendChild(row);
+                    });
+                    return;
+                }
+
+                // REGULAR WEAPONS
+                const byGame = currentGame === 'ALL'
+                    ? allWeapons
+                    : allWeapons.filter(w => (w.game || 'BO7') === currentGame);
+
+                const filtered = filter === 'All' 
+                    ? byGame 
+                    : byGame.filter(w => {
+                        const baseW = baseWeaponsList.find(b => b.id === w.baseWeaponId) || {};
+                        const playstyle = w.playstyle || baseW.playstyle || 'Longo Alcance';
+                        const isAbsoluteMeta = w.absoluteMeta === true || playstyle === 'Meta Absoluto';
+                        
+                        if (filter === 'Meta Absoluto') return isAbsoluteMeta;
+                        else return playstyle === filter && playstyle !== 'Meta Absoluto';
+                    });
+
+                if (filtered.length === 0) {
+                    list.innerHTML = '<div class="empty-state">Nenhuma arma encontrada para este filtro.</div>';
+                    return;
+                }
+
+                filtered.forEach(w => {
+                    const baseW = baseWeaponsList.find(b => b.id === w.baseWeaponId) || {};
+                    const imgSrc = w.image || baseW.image || 'https://via.placeholder.com/300x150/161b22/8b949e?text=Sem+Imagem';
+                    const category = baseW.category || w.category || 'Arma';
+                    const playstyle = w.playstyle || baseW.playstyle || 'Longo Alcance';
+                    const isAbsoluteMeta = w.absoluteMeta === true || playstyle === 'Meta Absoluto';
+                    const displayPlaystyle = playstyle === 'Meta Absoluto' ? 'Longo Alcance' : playstyle;
+                    const tagClass = getTagClass(displayPlaystyle);
+
+                    // Border color based on playstyle
+                    const borderColors = {
+                        'Longo Alcance': '#00d2ff',
+                        'Curto Alcance': '#ff2a9d',
+                        'Atirador de Elite': '#ff3333',
+                        'Fuzil de Atirador': '#a855f7'
+                    };
+                    const borderColor = borderColors[displayPlaystyle] || '#00d2ff';
+
+                    let attachmentsHtml = '';
+                    if (w.attachments) {
+                        for (const [slot, item] of Object.entries(w.attachments)) {
+                            let itemName = '';
+                            if (typeof item === 'string') itemName = item;
+                            else if (item && typeof item === 'object') itemName = item.name;
+                            if (itemName && itemName.trim() !== '') {
+                                attachmentsHtml += `<div class="attachment-pill"><span>${slot.toUpperCase()}</span> ${itemName}</div>`;
+                            }
+                        }
+                    }
+
+                    if (w.ttk) {
+                        attachmentsHtml += `<div class="attachment-pill"><span style="color: #ff2a9d;">TTK</span> ${w.ttk}</div>`;
+                    }
+
+                    // Code pill for header
+                    const codePillHtml = w.code 
+                        ? `<div class="weapon-code-pill" data-code="${w.code}" title="Clique para copiar"><span class="copy-icon">📋</span> ${w.code}</div>` 
+                        : '';
+
+                    // Code pill for body (copyable)
+                    if (w.code) {
+                        attachmentsHtml += `<div class="attachment-pill" style="border-color: rgba(0,210,255,0.15); background: rgba(0,210,255,0.04); cursor:pointer;" data-code="${w.code}">
+                            <span style="color:#00d2ff;">CÓDIGO DE COMPARTILHAMENTO</span> 
+                            <div style="font-family: 'Courier New', monospace; font-size: 14px; color: #00d2ff; font-weight: 600;">${w.code}</div>
+                        </div>`;
+                    }
+
+                    const row = document.createElement('div');
+                    row.className = 'weapon-accordion';
+                    row.style.setProperty('--dynamic-color', borderColor);
+                    row.style.setProperty('--dynamic-color-glow', borderColor + '40');
+                    row.innerHTML = `
+                        <div class="weapon-header-btn">
+                            <div class="weapon-header-left">
+                                <div class="weapon-thumb-wrapper">
+                                    <div class="weapon-thumb-glow" style="background: ${borderColor};"></div>
+                                    <img src="${imgSrc}" alt="${w.weaponName || w.name}" class="weapon-thumb" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x150/161b22/8b949e?text=Arma';">
+                                </div>
+                                <div class="weapon-header-info">
+                                    <div style="display:flex; align-items:baseline; gap:10px;">
+                                        <h2>${w.weaponName || w.name || 'Arma'}</h2>
+                                        <span class="weapon-category-label">${category}</span> ${(w.game || "BO7").toUpperCase() === "MW4" ? `<span class="game-badge game-badge-mw4">MW4</span>` : `<span class="game-badge game-badge-bo7">BO7</span>`}
+                                    </div>
+                                    <div class="meta-tags">
+                                        <div class="tag-playstyle ${tagClass}">${displayPlaystyle}</div>
+                                        ${isAbsoluteMeta ? `<div class="tag-playstyle tag-meta">Meta Absoluto</div>` : ''}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="weapon-header-right">
+                                ${w.views && w.views > 0 ? `<span style="color:#484f58; font-size:11px; font-family: var(--font-mono);">&#128065; ${w.views >= 1000 ? (w.views/1000).toFixed(1)+'k' : w.views}</span>` : ''}
+                                ${isAbsoluteMeta && w.recoilImage ? `<button class="recoil-btn" data-img="${w.recoilImage}" data-name="${w.weaponName || w.name}" title="Ver Padrão de Recoil" style="padding: 5px 10px; background: rgba(255,170,0,0.08); border: 1px solid rgba(255,170,0,0.35); border-radius: 6px; color: #ffaa00; font-size: 11px; font-weight: 700; cursor: pointer; font-family: 'Outfit', sans-serif; white-space: nowrap; transition: all 0.2s;">&#127919; Recoil</button>` : ''}
+                                ${isAbsoluteMeta && w.previewVideo ? `<button class="video-preview-btn" data-video="${w.previewVideo}" data-name="${w.weaponName || w.name}" title="Ver Prévia da Arma" style="padding: 5px 10px; background: rgba(99,102,241,0.08); border: 1px solid rgba(99,102,241,0.35); border-radius: 6px; color: #818cf8; font-size: 11px; font-weight: 700; cursor: pointer; font-family: 'Outfit', sans-serif; white-space: nowrap; transition: all 0.2s;">&#9654; Prévia</button>` : ''}
+                                ${codePillHtml}
+                                <div class="accordion-arrow">▼</div>
+                            </div>
+                        </div>
+                        <div class="accordion-body">
+                            <div class="attachments-grid">${attachmentsHtml}<div style="background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0.2) 100%); border: 1px solid rgba(0,210,255,0.15); padding: 12px 16px; border-radius: 8px; display: flex; align-items: center; gap: 10px;"><button class="vote-btn" data-weapon-id="${w.id}" style="flex: 1; padding: 8px 12px; background: rgba(0,210,255,0.06); border: 1px solid rgba(0,210,255,0.25); border-radius: 6px; color: #00d2ff; font-family: 'Outfit', sans-serif; font-size: 12px; font-weight: 700; cursor: pointer; transition: all 0.2s; letter-spacing: 0.5px; white-space: nowrap;">${hasVoted(w.id) ? '✅ Aprovado!' : '👍 Aprovar esta classe'}</button><span class="vote-counter" style="color: #6e7681; font-size: 11px; font-family: var(--font-mono); white-space: nowrap;">${w.votos || 0} votos</span></div></div>
+                            <div class="weapon-image">
+                                <img src="${imgSrc}" alt="${w.name}" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x150/161b22/8b949e?text=Arma';">
+                                
+                            </div>
+                        </div>
+                    `;
+
+                    // Apply voted state styling immediately if already voted
+                    if (hasVoted(w.id)) {
+                        setTimeout(() => {
+                            const btn = row.querySelector('.vote-btn');
+                            if (btn) {
+                                btn.disabled = true;
+                                btn.style.background = 'rgba(63, 185, 80, 0.15)';
+                                btn.style.borderColor = '#3fb950';
+                                btn.style.color = '#3fb950';
+                            }
+                        }, 0);
+                    }
+
+                    // Accordion click + view tracking
+                    row.querySelector('.weapon-header-btn').addEventListener('click', (e) => {
+                        if (e.target.closest('.weapon-code-pill') || e.target.closest('.recoil-btn') || e.target.closest('.video-preview-btn')) return;
+                        const wasOpen = row.classList.contains('open');
+                        row.classList.toggle('open');
+                        if (!wasOpen && w.id) trackView(w.id);
+                    });
+
+                    // Vote button handler
+                    const voteBtn = row.querySelector('.vote-btn');
+                    if (voteBtn) {
+                        voteBtn.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            voteOnWeapon(w.id, voteBtn);
+                        });
+                    }
+
+                    // Code pill copy handlers
+                    row.querySelectorAll('[data-code]').forEach(el => {
+                        el.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            copyCode(el.dataset.code, el);
+                        });
+                    });
+
+                    // Recoil button handler
+                    const recoilBtn = row.querySelector('.recoil-btn');
+                    if (recoilBtn) {
+                        recoilBtn.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            const modal = document.getElementById('recoilModal');
+                            modal.querySelector('#recoilModalName').textContent = recoilBtn.dataset.name;
+                            modal.querySelector('#recoilModalImg').src = recoilBtn.dataset.img;
+                            modal.style.display = 'flex';
+                        });
+                    }
+
+                    // Video preview button handler
+                    const videoBtn = row.querySelector('.video-preview-btn');
+                    if (videoBtn) {
+                        videoBtn.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            const modal = document.getElementById('videoPreviewModal');
+                            const player = modal.querySelector('#videoPreviewPlayer');
+                            modal.querySelector('#videoPreviewName').textContent = videoBtn.dataset.name;
+                            player.src = videoBtn.dataset.video;
+                            player.load();
+                            player.play().catch(() => {});
+                            modal.style.display = 'flex';
+                        });
+                    }
+
+                    list.appendChild(row);
+                });
+            }
+        });
+    </script>
+
+    <!-- MODAL VIDEO PREVIEW -->
+    <div id="videoPreviewModal" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.93); backdrop-filter:blur(10px); align-items:center; justify-content:center;" onclick="if(event.target===this){this.style.display='none'; document.getElementById('videoPreviewPlayer').pause();}">
+        <div style="position:relative; max-width:540px; width:92%; background:#0d1117; border:1px solid rgba(99,102,241,0.3); border-radius:16px; padding:20px; text-align:center; box-shadow: 0 0 40px rgba(99,102,241,0.2);">
+            <button onclick="document.getElementById('videoPreviewModal').style.display='none'; document.getElementById('videoPreviewPlayer').pause();" style="position:absolute; top:12px; right:16px; background:none; border:none; color:#6e7681; font-size:22px; cursor:pointer; line-height:1;">&times;</button>
+            <div style="font-size:11px; font-weight:700; color:#818cf8; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">&#9654; Prévia da Arma</div>
+            <h3 id="videoPreviewName" style="font-family:'Teko',sans-serif; font-size:28px; color:#fff; margin:0 0 14px 0; text-transform:uppercase;"></h3>
+            <video id="videoPreviewPlayer" style="width:100%; border-radius:10px; border:1px solid rgba(255,255,255,0.06); background:#000; max-height:65vh;" controls autoplay muted playsinline loop></video>
+            <p style="color:#6e7681; font-size:11px; margin-top:12px;">Campo de tiro &mdash; veja a cadência e o recuo na prática.</p>
+        </div>
+    </div>
+
+    <!-- MODAL RECOIL PATTERN -->
+    <div id="recoilModal" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.88); backdrop-filter:blur(8px); align-items:center; justify-content:center;" onclick="if(event.target===this) this.style.display='none';">
+        <div style="position:relative; max-width:480px; width:90%; background:#0d1117; border:1px solid rgba(255,170,0,0.3); border-radius:16px; padding:24px; text-align:center; box-shadow: 0 0 40px rgba(255,170,0,0.15);">
+            <button onclick="document.getElementById('recoilModal').style.display='none'" style="position:absolute; top:12px; right:16px; background:none; border:none; color:#6e7681; font-size:22px; cursor:pointer; line-height:1;">&times;</button>
+            <div style="font-size:11px; font-weight:700; color:#ffaa00; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">🎯 Padrão de Recoil</div>
+            <h3 id="recoilModalName" style="font-family:'Teko',sans-serif; font-size:32px; color:#fff; margin:0 0 16px 0; text-transform:uppercase;"></h3>
+            <img id="recoilModalImg" src="" alt="Padrão de Recoil" style="max-width:100%; max-height:60vh; border-radius:10px; border:1px solid rgba(255,255,255,0.06); object-fit:contain;">
+            <p style="color:#6e7681; font-size:12px; margin-top:14px; line-height:1.5;">Este é o padrão de recoil da arma. Use como referência para treinar o controle de recoil e dominar o lobbies.</p>
+        </div>
+    </div>
+
+    <!-- MODAL LIVEPIX -->
+    <div id="livepixModal" class="livepix-modal">
+        <div class="livepix-content">
+            <button class="close-livepix" onclick="document.getElementById('livepixModal').style.display='none'">×</button>
+            <h2>Apoie o <span>Projeto</span></h2>
+            <p>O <strong>WARZONE BR METAS</strong> é desenvolvido de forma 100% independente por <strong>Gerefps</strong>. Se as classes te ajudaram a amassar nos lobbies, considere apoiar para mantermos a ferramenta no ar e sempre atualizada!</p>
+            
+            <iframe src="https://widget.livepix.gg/embed/5e20cd17-fe20-4e73-9c04-63e7ea974a76" width="100%" height="350" style="border:none; border-radius: 8px; margin-bottom: 15px;"></iframe>
+            
+            <a href="https://livepix.gg/gere201199" target="_blank" class="btn-support" style="justify-content: center; width: 100%; box-sizing: border-box; padding: 12px; font-size: 15px;">
+                Fazer Doação Direta (LivePix)
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>
