@@ -1087,7 +1087,327 @@
                 display: none;
             }
         }
-    </style>
+
+        /* ===== CARDS DOS METAS (CARTAS RARAS) ===== */
+        .filter-btn-cards {
+            border-color: rgba(0, 210, 255, 0.4);
+            color: #00d2ff;
+            background: rgba(0, 210, 255, 0.05);
+        }
+        .filter-btn-cards:hover {
+            border-color: #00d2ff;
+            background: rgba(0, 210, 255, 0.15);
+            box-shadow: 0 0 12px rgba(0, 210, 255, 0.25);
+        }
+        .filter-btn-cards.active {
+            background: rgba(0, 210, 255, 0.2);
+            border-color: #00d2ff;
+            color: #fff;
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.4);
+        }
+
+        .cards-meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 390px));
+            gap: 28px;
+            justify-content: center;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .rare-card-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .meta-card {
+            width: 100%;
+            border-radius: 20px;
+            background: 
+                radial-gradient(circle at 50% 35%, rgba(0, 25, 45, 0.42) 0%, rgba(2, 6, 12, 0.85) 100%),
+                url('fundo_card_blur.jpg') center/cover no-repeat;
+            border: 2px solid rgba(0, 210, 255, 0.5);
+            box-shadow: 
+                0 0 20px rgba(0, 210, 255, 0.2),
+                inset 0 0 30px rgba(0, 210, 255, 0.08),
+                0 15px 35px rgba(0, 0, 0, 0.8);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 24px 20px;
+            box-sizing: border-box;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .meta-card:hover {
+            transform: translateY(-6px);
+            border-color: #00d2ff;
+            box-shadow: 
+                0 0 35px rgba(0, 210, 255, 0.45),
+                inset 0 0 40px rgba(0, 210, 255, 0.15),
+                0 20px 40px rgba(0, 0, 0, 0.9);
+        }
+
+        .meta-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                115deg,
+                transparent 40%,
+                rgba(0, 210, 255, 0.08) 45%,
+                rgba(255, 255, 255, 0.12) 50%,
+                rgba(0, 210, 255, 0.08) 55%,
+                transparent 60%
+            );
+            pointer-events: none;
+            opacity: 0.6;
+            transform: rotate(25deg);
+            transition: opacity 0.3s ease;
+        }
+
+        .meta-card:hover::before {
+            opacity: 1;
+            animation: holoShift 2.5s infinite linear;
+        }
+
+        @keyframes holoShift {
+            0% { transform: translateY(-30%) rotate(25deg); }
+            100% { transform: translateY(30%) rotate(25deg); }
+        }
+
+        .stars-ribbon {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 2px;
+            padding: 4px 8px;
+            background: rgba(255, 185, 0, 0.15);
+            border: 1px solid rgba(255, 185, 0, 0.5);
+            border-radius: 6px;
+            color: #ffb900;
+            font-size: 11px;
+            letter-spacing: 1px;
+            box-shadow: 0 0 10px rgba(255, 185, 0, 0.25);
+            z-index: 5;
+        }
+
+        .card-top-title {
+            font-family: 'Teko', sans-serif;
+            color: var(--brand-color, #00d2ff);
+            font-size: 16px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: -4px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-weapon-name {
+            font-family: 'Teko', sans-serif;
+            font-size: 60px;
+            font-weight: 700;
+            line-height: 0.95;
+            text-transform: uppercase;
+            color: #fff;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 210, 255, 0.2);
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            margin-bottom: 6px;
+        }
+
+        .card-box {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.65);
+            border: 1px solid rgba(0, 210, 255, 0.4);
+            border-radius: 8px;
+            padding: 6px 12px;
+            text-align: center;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 2;
+            backdrop-filter: blur(4px);
+        }
+
+        .card-box-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+            color: #aaa;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 2px;
+        }
+
+        .card-box-value {
+            font-family: 'Teko', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #00d2ff;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            line-height: 1;
+        }
+
+        .card-weapon-stage {
+            width: 100%;
+            height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin: 6px 0;
+            z-index: 2;
+        }
+
+        .card-weapon-stage::before {
+            content: '';
+            position: absolute;
+            width: 70%;
+            height: 40px;
+            background: radial-gradient(ellipse at center, rgba(0, 210, 255, 0.35) 0%, transparent 70%);
+            border-radius: 50%;
+            bottom: 15px;
+            filter: blur(10px);
+        }
+
+        .card-weapon-img {
+            max-width: 90%;
+            max-height: 130px;
+            object-fit: contain;
+            filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.8));
+            position: relative;
+            z-index: 3;
+            transition: transform 0.3s ease;
+        }
+
+        .meta-card:hover .card-weapon-img {
+            transform: scale(1.05);
+        }
+
+        .card-attachments-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+            width: 100%;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-att-box {
+            background: rgba(0, 0, 0, 0.65);
+            border: 1px solid rgba(0, 210, 255, 0.4);
+            border-radius: 8px;
+            padding: 6px 6px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-sizing: border-box;
+            backdrop-filter: blur(4px);
+            min-height: 52px;
+        }
+
+        .card-att-type {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 8.5px;
+            font-weight: 700;
+            color: #aaa;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 3px;
+            line-height: 1;
+        }
+
+        .card-att-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 9px;
+            font-weight: 800;
+            color: #00d2ff;
+            text-transform: uppercase;
+            line-height: 1.2;
+            white-space: normal;
+            word-break: normal;
+            overflow-wrap: break-word;
+            text-align: center;
+            max-width: 100%;
+        }
+
+        .card-ttk-row {
+            width: 100%;
+            margin-bottom: 6px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-code-row {
+            width: 100%;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-footer {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 900;
+            color: #00d2ff;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-top: 4px;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 0 10px rgba(0, 210, 255, 0.4);
+        }
+
+        .card-actions-bar {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .btn-download-card {
+            width: 100%;
+            padding: 10px 16px;
+            background: rgba(0, 210, 255, 0.1);
+            border: 1px solid rgba(0, 210, 255, 0.45);
+            border-radius: 8px;
+            color: #00d2ff;
+            font-family: 'Outfit', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 0 10px rgba(0, 210, 255, 0.15);
+        }
+
+        .btn-download-card:hover {
+            background: rgba(0, 210, 255, 0.25);
+            border-color: #00d2ff;
+            color: #ffffff;
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.45);
+            transform: translateY(-2px);
+        }</style>
+    <script src="html2canvas.min.js"></script>
 </head>
 <body>
 
@@ -1137,6 +1457,9 @@
                 <div class="sidebar-section-title">Criadores</div>
                 <button class="sidebar-link" data-filter="PRO">
                     <span class="sidebar-icon">⭐</span> Criadores PRO
+                </button>
+                <button class="sidebar-link" data-filter="CardsMeta" style="border-left-color: #00d2ff;">
+                    <span class="sidebar-icon">🃏</span> Cards dos Metas
                 </button>
             </div>
 
@@ -1195,6 +1518,7 @@
                 <button class="filter-btn" data-filter="Atirador de Elite">Atirador de Elite</button>
                 <button class="filter-btn" data-filter="Fuzil de Atirador">Fuzil de Atirador</button>
                 <button class="filter-btn filter-btn-pro" data-filter="PRO">Criadores PRO</button>
+                <button class="filter-btn filter-btn-cards" data-filter="CardsMeta" style="border-color: rgba(0, 210, 255, 0.4); color: #00d2ff;">🃏 Cards dos Metas</button>
             </div>
 
             <!-- Meta Update Banner -->
@@ -1346,7 +1670,8 @@
                         'Curto Alcance': 'CURTO ALCANCE',
                         'Atirador de Elite': 'ATIRADOR DE ELITE',
                         'Fuzil de Atirador': 'FUZIL DE ATIRADOR',
-                        'PRO': 'CRIADORES PRO'
+                        'PRO': 'CRIADORES PRO',
+                        'CardsMeta': 'CARDS DOS METAS (CARTAS RARAS)'
                     };
                     let t = titles[filterValue] || filterValue.toUpperCase();
                     if (currentGame === 'BO7') t += ' — BLACK OPS 7';
@@ -1451,7 +1776,108 @@
                 const list = document.getElementById('weapons-list');
                 list.innerHTML = '';
 
-                // PRO CREATORS
+                                // CARDS DOS METAS (CARTAS RARAS - META ABSOLUTO)
+                if (filter === 'CardsMeta') {
+                    const byGame = currentGame === 'ALL'
+                        ? allWeapons
+                        : allWeapons.filter(w => (w.game || 'BO7') === currentGame);
+
+                    const metaCards = byGame.filter(w => {
+                        const baseW = baseWeaponsList.find(b => b.id === w.baseWeaponId) || {};
+                        return w.absoluteMeta === true || (w.playstyle || baseW.playstyle) === 'Meta Absoluto';
+                    });
+
+                    if (metaCards.length === 0) {
+                        list.innerHTML = '<div class="empty-state">Nenhum Card Meta encontrado para este filtro de jogo.</div>';
+                        return;
+                    }
+
+                    const grid = document.createElement('div');
+                    grid.className = 'cards-meta-grid';
+
+                    metaCards.forEach((w, index) => {
+                        const baseW = baseWeaponsList.find(b => b.id === w.baseWeaponId) || {};
+                        const imgSrc = w.image || baseW.image || 'https://via.placeholder.com/300x150/161b22/8b949e?text=Arma';
+                        const playstyle = w.playstyle || baseW.playstyle || 'Longo Alcance';
+                        const displayPlaystyle = playstyle === 'Meta Absoluto' ? 'Meta Absoluto' : playstyle;
+                        const cardId = `meta-card-${w.id || index}`;
+
+                        let attachmentsList = [];
+                        if (w.attachments) {
+                            for (const [slot, item] of Object.entries(w.attachments)) {
+                                let itemName = '';
+                                if (typeof item === 'string') itemName = item;
+                                else if (item && typeof item === 'object') itemName = item.name;
+                                if (itemName && itemName.trim() !== '') {
+                                    attachmentsList.push({ slot: slot.toUpperCase(), name: itemName });
+                                }
+                            }
+                        }
+
+                        let attsHtml = '';
+                        attachmentsList.slice(0, 5).forEach((att, attIdx) => {
+                            const isFull = (attachmentsList.length === 5 && attIdx === 4);
+                            attsHtml += `
+                                <div class="card-att-box" style="${isFull ? 'grid-column: span 2;' : ''}">
+                                    <div class="card-att-type">${att.slot}</div>
+                                    <div class="card-att-name" title="${att.name}">${att.name}</div>
+                                </div>
+                            `;
+                        });
+
+                        const wrapper = document.createElement('div');
+                        wrapper.className = 'rare-card-wrapper';
+                        wrapper.innerHTML = `
+                            <div class="meta-card" id="${cardId}">
+                                <div class="stars-ribbon" title="Raridade Máxima">★★★★★</div>
+                                <div class="card-top-title">MELHOR CLASSE WARZONE</div>
+                                <div class="card-weapon-name">${w.weaponName || w.name || 'ARMA'}</div>
+
+                                <div class="card-box" style="margin-bottom: 6px;">
+                                    <div class="card-box-label">CATEGORIA</div>
+                                    <div class="card-box-value">${displayPlaystyle.toUpperCase()}</div>
+                                </div>
+
+                                <div class="card-weapon-stage">
+                                    <img src="${imgSrc}" alt="${w.weaponName || w.name}" class="card-weapon-img" crossorigin="anonymous" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x150/161b22/8b949e?text=Arma';">
+                                </div>
+
+                                <div class="card-attachments-grid">
+                                    ${attsHtml}
+                                </div>
+
+                                ${w.ttk ? `
+                                    <div class="card-box card-ttk-row">
+                                        <div class="card-box-label">TTK</div>
+                                        <div class="card-box-value" style="font-family:'Montserrat',sans-serif; font-size:20px; font-weight:900; color:#00d2ff;">${w.ttk}</div>
+                                    </div>
+                                ` : ''}
+
+                                ${w.code ? `
+                                    <div class="card-box card-code-row" data-code="${w.code}" >
+                                        <div class="card-box-label">CÓDIGO DE CLASSE</div>
+                                        <div class="card-box-value" style="font-family:'JetBrains Mono',monospace; font-size:14px; letter-spacing:1px; color:#00d2ff;">${w.code}</div>
+                                    </div>
+                                ` : ''}
+
+                                <div class="card-footer">WARZONEBRMETAS</div>
+                            </div>
+
+                            <div class="card-actions-bar">
+                                <button class="btn-download-card" onclick="downloadMetaCard('${cardId}', '${w.weaponName || w.name || 'Arma'}', this)">📸 Baixar Card</button>
+                            </div>
+                        `;
+
+                        
+
+                        grid.appendChild(wrapper);
+                    });
+
+                    list.appendChild(grid);
+                    return;
+                }
+
+// PRO CREATORS
                 if (filter === 'PRO') {
                     const filteredPros = currentGame === 'ALL'
                         ? allPros
@@ -1508,7 +1934,7 @@
 
                             // Code pill for inner weapon header
                             const codePillHtml = w.code 
-                                ? `<div class="weapon-code-pill" data-code="${w.code}" title="Clique para copiar"><span class="copy-icon">📋</span> ${w.code}</div>` 
+                                ? `<div class="weapon-code-pill" data-code="${w.code}" ><span class="copy-icon">📋</span> ${w.code}</div>` 
                                 : '';
 
                             // Code pill for attachments list
@@ -1648,7 +2074,7 @@
 
                     // Code pill for header
                     const codePillHtml = w.code 
-                        ? `<div class="weapon-code-pill" data-code="${w.code}" title="Clique para copiar"><span class="copy-icon">📋</span> ${w.code}</div>` 
+                        ? `<div class="weapon-code-pill" data-code="${w.code}" ><span class="copy-icon">📋</span> ${w.code}</div>` 
                         : '';
 
                     // Code pill for body (copyable)
@@ -1767,6 +2193,113 @@
                 });
             }
         });
+
+            // === HELPER: Download Meta Card as PNG Image ===
+            window.downloadMetaCard = function(cardId, weaponName, btnEl) {
+                const card = document.getElementById(cardId);
+                if (!card) return;
+                const origText = btnEl.innerHTML;
+                btnEl.innerHTML = '⏳ Gerando Card...';
+                btnEl.disabled = true;
+
+                const executeCapture = () => {
+                    html2canvas(card, {
+                        scale: 2,
+                        useCORS: true,
+                        allowTaint: true,
+                        backgroundColor: '#050a12',
+                        scrollX: 0,
+                        scrollY: 0,
+                        logging: false,
+                        onclone: (clonedDoc) => {
+                            const clonedCard = clonedDoc.getElementById(cardId);
+                            if (clonedCard) {
+                                clonedCard.style.transform = 'none';
+                                clonedCard.style.boxShadow = 'none';
+                                clonedCard.style.borderRadius = '0px';
+                                const style = clonedDoc.createElement('style');
+                                style.innerHTML = '.meta-card::before { display: none !important; }';
+                                clonedDoc.head.appendChild(style);
+                            }
+                        }
+                    }).then(canvas => {
+                        const cleanName = (weaponName || 'Arma').replace(/[^a-zA-Z0-9_-]/g, '_');
+                        const filename = `${cleanName}_Card_Meta.png`;
+
+                        if (canvas.toBlob) {
+                            canvas.toBlob(blob => {
+                                const url = URL.createObjectURL(blob);
+                                const a = document.createElement('a');
+                                a.style.display = 'none';
+                                a.href = url;
+                                a.download = filename;
+                                document.body.appendChild(a);
+                                a.click();
+                                setTimeout(() => {
+                                    document.body.removeChild(a);
+                                    URL.revokeObjectURL(url);
+                                }, 2000);
+                            }, 'image/png');
+                        } else {
+                            const a = document.createElement('a');
+                            a.download = filename;
+                            a.href = canvas.toDataURL('image/png');
+                            document.body.appendChild(a);
+                            a.click();
+                            setTimeout(() => document.body.removeChild(a), 1000);
+                        }
+
+                        btnEl.innerHTML = '✅ Card Baixado!';
+                        setTimeout(() => {
+                            btnEl.innerHTML = origText;
+                            btnEl.disabled = false;
+                        }, 2500);
+                    }).catch(err => {
+                        console.error('Erro ao gerar card:', err);
+                        alert('Erro ao gerar imagem: ' + (err.message || err));
+                        btnEl.innerHTML = origText;
+                        btnEl.disabled = false;
+                    });
+                };
+
+                if (typeof html2canvas !== 'undefined') {
+                    executeCapture();
+                } else {
+                    const script = document.createElement('script');
+                    script.src = 'html2canvas.min.js';
+                    script.onload = executeCapture;
+                    script.onerror = () => {
+                        const cdnScript = document.createElement('script');
+                        cdnScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+                        cdnScript.onload = executeCapture;
+                        cdnScript.onerror = () => {
+                            alert('Não foi possível carregar a biblioteca de captura de imagem.');
+                            btnEl.innerHTML = origText;
+                            btnEl.disabled = false;
+                        };
+                        document.head.appendChild(cdnScript);
+                    };
+                    document.head.appendChild(script);
+                }
+            };
+
+            window.copyCardCode = function(code, btnEl) {
+                if (!code) return;
+                navigator.clipboard.writeText(code).then(() => {
+                    const origText = btnEl.innerHTML;
+                    btnEl.innerHTML = '✓ Copiado!';
+                    btnEl.style.color = '#3fb950';
+                    btnEl.style.borderColor = '#3fb950';
+                    setTimeout(() => {
+                        btnEl.innerHTML = origText;
+                        btnEl.style.color = '';
+                        btnEl.style.borderColor = '';
+                    }, 2000);
+                }).catch(() => {
+                    alert('Código copiado: ' + code);
+                });
+            };
+    
     </script>
 
     <!-- MODAL VIDEO PREVIEW -->
