@@ -374,5 +374,21 @@
     "game": "MW4",
     "image": "/uploads/1793977598426.png",
     "id": "1793977598534"
+  },
+  {
+    "name": "Cronem osprey",
+    "category": "Fuzil de assalto",
+    "playstyle": "Meta Absoluto",
+    "game": "MW4",
+    "image": "/uploads/1793986914861.png",
+    "id": "1793986914977"
+  },
+  {
+    "name": "VEL 46",
+    "category": "SUBMETRALHADORA ",
+    "playstyle": "Meta Absoluto",
+    "game": "MW4",
+    "image": "/uploads/1793987554438.png",
+    "id": "1793987554544"
   }
 ]
