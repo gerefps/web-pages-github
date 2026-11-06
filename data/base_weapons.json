@@ -134,5 +134,245 @@
     "game": "BO7",
     "image": "/uploads/1793413019782.png",
     "id": "1793413019888"
+  },
+  {
+    "id": "mw4_hyeon_burst",
+    "name": "Hyeon Burst (Temporada 1)",
+    "category": "Fuzis de Assalto",
+    "playstyle": "Longo Alcance",
+    "image": "/weapons/mw4/MW4_Hyeon-Burst_blue.webp",
+    "game": "MW4"
+  },
+  {
+    "id": "mw4_vel_46",
+    "name": "VEL 46 (Temporada 1)",
+    "category": "SMGs",
+    "playstyle": "Curto Alcance",
+    "image": "/weapons/mw4/MW4_VEL-46_blue.webp",
+    "game": "MW4"
+  },
+  {
+    "id": "mw4_kg_7_vulcan",
+    "name": "KG-7 Vulcan (Temporada 1)",
+    "category": "Fuzis de Precisão",
+    "playstyle": "Atirador de Elite",
+    "image": "/weapons/mw4/MW4_KG-7-Vulcan_blue.webp",
+    "game": "MW4"
+  },
+  {
+    "id": "mw4_iso_nightshade",
+    "name": "ISO Nightshade (Temporada 1)",
+    "category": "SMGs",
+    "playstyle": "Curto Alcance",
+    "image": "/weapons/mw4/MW4_ISO-Nightshade_blue.webp",
+    "game": "MW4"
+  },
+  {
+    "id": "mw4_axion",
+    "name": "Axion (Temporada 1)",
+    "category": "Fuzis de Assalto",
+    "playstyle": "Longo Alcance",
+    "image": "/weapons/mw4/MW4_Axion_blue.webp",
+    "game": "MW4"
+  },
+  {
+    "id": "mw4_m4",
+    "name": "M4 (Temporada 1)",
+    "category": "Fuzis de Assalto",
+    "playstyle": "Longo Alcance",
+    "image": "/weapons/mw4/MW4_M4_blue.webp",
+    "game": "MW4"
+  },
+  {
+    "id": "mw4_signal_50",
+    "name": "Signal 50 (Temporada 1)",
+    "category": "Fuzis de Precisão",
+    "playstyle": "Atirador de Elite",
+    "image": "/weapons/mw4/MW4_Signal-50_blue.webp",
+    "game": "MW4"
+  },
+  {
+    "id": "mw4_kastov_762",
+    "name": "Kastov 762 (Temporada 1)",
+    "category": "Fuzis de Assalto",
+    "playstyle": "Longo Alcance",
+    "image": "/weapons/mw4/MW4_Kastov-762_blue.webp",
+    "game": "MW4"
+  },
+  {
+    "id": "mw4_ppsh_41",
+    "name": "PPSh-41 (Temporada 1)",
+    "category": "SMGs",
+    "playstyle": "Curto Alcance",
+    "image": "/weapons/mw4/MW4_PPSh-41_blue.webp",
+    "game": "MW4"
+  },
+  {
+    "id": "mw4_oden",
+    "name": "Oden (Temporada 1)",
+    "category": "Fuzis de Assalto",
+    "playstyle": "Longo Alcance",
+    "image": "/weapons/mw4/MW4_Oden_blue.webp",
+    "game": "MW4"
+  },
+  {
+    "id": "mw4_wz55_striga",
+    "name": "Wz.55 Striga (Temporada 1)",
+    "category": "SMGs",
+    "playstyle": "Curto Alcance",
+    "image": "/weapons/mw4/MW4_WZ.55-Striga_blue.webp",
+    "game": "MW4"
+  },
+  {
+    "id": "mw4_han_86",
+    "name": "Han 86 (Temporada 1)",
+    "category": "Fuzis de Assalto",
+    "playstyle": "Longo Alcance",
+    "image": "/weapons/mw4/MW4_HAN-86_blue.webp",
+    "game": "MW4"
+  },
+  {
+    "id": "mw4_mosin_nagant",
+    "name": "Mosin-Nagant (Temporada 1)",
+    "category": "Fuzis de Atirador",
+    "playstyle": "Atirador de Elite",
+    "image": "/weapons/mw4/MW4_Mosin-Nagant_blue.webp",
+    "game": "MW4"
+  },
+  {
+    "id": "mw4_oris_86",
+    "name": "Oris 8.6 (Temporada 1)",
+    "category": "Fuzis de Atirador",
+    "playstyle": "Atirador de Elite",
+    "image": "/weapons/mw4/MW4_Oris-8.6_blue.webp",
+    "game": "MW4"
+  },
+  {
+    "id": "mw4_krait_p68",
+    "name": "Krait P68 (Temporada 1)",
+    "category": "Pistolas",
+    "playstyle": "Curto Alcance",
+    "image": "/weapons/mw4/MW4_Krait-P68_blue.webp",
+    "game": "MW4"
+  },
+  {
+    "id": "mw4_patriot_xmr",
+    "name": "Patriot XMR (Temporada 1)",
+    "category": "Fuzis de Assalto",
+    "playstyle": "Longo Alcance",
+    "image": "/weapons/mw4/MW4_Patriot-XMR_blue.webp",
+    "game": "MW4"
+  },
+  {
+    "id": "mw4_sang_9mm",
+    "name": "Sang 9 mm (Temporada 1)",
+    "category": "Pistolas",
+    "playstyle": "Curto Alcance",
+    "image": "/weapons/mw4/MW4_SANG-9mm_blue.webp",
+    "game": "MW4"
+  },
+  {
+    "id": "mw4_mar_9",
+    "name": "MAR-9 (Temporada 1)",
+    "category": "Fuzis de Atirador",
+    "playstyle": "Atirador de Elite",
+    "image": "/weapons/mw4/MW4_MAR-9_blue.webp",
+    "game": "MW4"
+  },
+  {
+    "id": "mw4_finn_lmg",
+    "name": "ML FiNN (Temporada 1)",
+    "category": "Fuzis de Assalto",
+    "playstyle": "Longo Alcance",
+    "image": "/weapons/mw4/MW4_FiNN-LMG_blue.webp",
+    "game": "MW4"
+  },
+  {
+    "id": "mw4_x_58_nyx",
+    "name": "X-58 Nyx (Temporada 1)",
+    "category": "SMGs",
+    "playstyle": "Curto Alcance",
+    "image": "/weapons/mw4/MW4_X-58-Nyx_blue.webp",
+    "game": "MW4"
+  },
+  {
+    "id": "mw4_warlord",
+    "name": "Warlord (Temporada 1)",
+    "category": "Escopetas",
+    "playstyle": "Longo Alcance",
+    "image": "/weapons/mw4/MW4_Warlord_blue.webp",
+    "game": "MW4"
+  },
+  {
+    "id": "mw4_type_73",
+    "name": "Type 73 (Temporada 1)",
+    "category": "Fuzis de Assalto",
+    "playstyle": "Longo Alcance",
+    "image": "/weapons/mw4/MW4_Type-73_blue.webp",
+    "game": "MW4"
+  },
+  {
+    "id": "mw4_cronen_squall",
+    "name": "Cronen Squall (Temporada 1)",
+    "category": "Fuzis de Assalto",
+    "playstyle": "Longo Alcance",
+    "image": "/weapons/mw4/MW4_Cronen-Squall_blue.webp",
+    "game": "MW4"
+  },
+  {
+    "id": "mw4_rezi_12",
+    "name": "Rezi 12 (Temporada 1)",
+    "category": "Escopetas",
+    "playstyle": "Longo Alcance",
+    "image": "/weapons/mw4/MW4_Rezi-12_blue.webp",
+    "game": "MW4"
+  },
+  {
+    "id": "mw4_astaroth_57",
+    "name": "Astaroth.57 (Temporada 1)",
+    "category": "Fuzis de Precisão",
+    "playstyle": "Atirador de Elite",
+    "image": "/weapons/mw4/MW4_Astaroth-.57_blue.webp",
+    "game": "MW4"
+  },
+  {
+    "id": "mw4_apoc_338",
+    "name": "APOC-338 (Temporada 1)",
+    "category": "Fuzis de Assalto",
+    "playstyle": "Longo Alcance",
+    "image": "/weapons/mw4/MW4_APOC-338_blue.webp",
+    "game": "MW4"
+  },
+  {
+    "id": "mw4_mojave_357",
+    "name": "Mojave.357 (Temporada 1)",
+    "category": "Pistolas",
+    "playstyle": "Curto Alcance",
+    "image": "/weapons/mw4/MW4_Mojave-.357_blue.webp",
+    "game": "MW4"
+  },
+  {
+    "id": "mw4_50_gs",
+    "name": "50-gs",
+    "category": "Pistolas",
+    "playstyle": "Curto Alcance",
+    "image": "/weapons/mw4/MW4_.50-GS_blue.webp",
+    "game": "MW4"
+  },
+  {
+    "name": "HAN ",
+    "category": "Fuzil de assalto ",
+    "playstyle": "Meta Absoluto",
+    "game": "MW4",
+    "image": "/uploads/1793976978368.png",
+    "id": "1793976978661"
+  },
+  {
+    "name": "ISO NIGH",
+    "category": "Submetralhadora",
+    "playstyle": "Meta Absoluto",
+    "game": "MW4",
+    "image": "/uploads/1793977598426.png",
+    "id": "1793977598534"
   }
 ]

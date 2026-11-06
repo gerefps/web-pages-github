@@ -1,38 +1,41 @@
 [
   {
     "id": "6MeP6fT99HMIg2WEDJbk",
+    "proName": "PILI",
     "baseWeaponId": "1784832330175",
     "weaponImage": "/uploads/1793412294907.png",
-    "proName": "PILI",
-    "uid": "ZVWeGj0InYTDGOfUFJe0hfO55K63",
-    "weaponName": "FG42",
+    "photoUrl": "/uploads/1785251983913.jpg",
     "attachments": {
       "acoplamento": {
         "name": "VAS CONVERGENCE FOREGRIP"
       },
+      "carregador": {
+        "name": "CARREGADOR ESTENDIDO AVAR"
+      },
       "boca": {
         "name": "estabilizador hawker mk.2"
-      },
-      "cano": {
-        "name": "CANO ENMITY 9,7"
       },
       "coronha": {
         "name": "REVESTIMENTO hawker cub-55"
       },
-      "carregador": {
-        "name": "CARREGADOR ESTENDIDO AVAR"
+      "cano": {
+        "name": "CANO ENMITY 9,7"
       }
     },
-    "photoUrl": "/uploads/1785251983913.jpg"
+    "weaponName": "FG42",
+    "uid": "ZVWeGj0InYTDGOfUFJe0hfO55K63"
   },
   {
     "id": "DA9VDamUalykz3TdQRZf",
-    "code": "",
-    "photoUrl": "/uploads/1784845929455.png",
     "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2",
+    "code": "",
+    "weaponName": "REV 46 ROSK",
     "attachments": {
       "lente": {
         "name": "LTI Mini"
+      },
+      "cano": {
+        "name": "Cano Redwell Anolis 9,6"
       },
       "carregador": {
         "name": "Carregador Estendido 1"
@@ -42,56 +45,51 @@
       },
       "boca": {
         "name": "Freio de Cadencia de Tiro"
-      },
-      "cano": {
-        "name": "Cano Redwell Anolis 9,6"
       }
     },
-    "proHandle": "renatorosk",
     "baseWeaponId": "1783209442640",
     "proName": "Renato Rosk",
     "weaponImage": "/uploads/1793411930598.png",
-    "weaponName": "REV 46 ROSK"
+    "proHandle": "renatorosk",
+    "photoUrl": "/uploads/1784845929455.png"
   },
   {
     "id": "HFkKbMYS0AiorEXi7Zd6",
-    "weaponName": "FG42",
-    "baseWeaponId": "1784832330175",
+    "proHandle": "gerefps",
+    "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2",
+    "photoUrl": "/uploads/1784861325962.jpeg",
     "attachments": {
-      "cano": {
-        "name": "CANO BANDOLIER 16"
+      "lente": {
+        "name": "redwell 30-s 2x"
       },
       "boca": {
         "name": "MONOLITHIC SUPPRESSOR"
       },
-      "lente": {
-        "name": "redwell 30-s 2x"
-      },
-      "mods": {
-        "name": "8X57MM FMJ"
+      "cano": {
+        "name": "CANO BANDOLIER 16"
       },
       "carregador": {
         "name": "CARREGADOR ESTENDIDO OVERBOOK"
+      },
+      "mods": {
+        "name": "8X57MM FMJ"
       }
     },
-    "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2",
     "weaponImage": "/uploads/1793412294907.png",
-    "photoUrl": "/uploads/1784861325962.jpeg",
-    "proName": "Gerefps",
+    "weaponName": "FG42",
     "code": "A16-21YVV-R4K3D-CS11",
-    "proHandle": "gerefps"
+    "baseWeaponId": "1784832330175",
+    "proName": "Gerefps"
   },
   {
     "id": "Jq6XhCoRmwgccl0TcmHm",
     "proName": "camaradaboris",
-    "code": "",
-    "uid": "PrktnjHBDuOWmZv6wLd4GN3zprS2",
     "attachments": {
-      "carregador": {
-        "name": "carregador estendido II"
-      },
       "cano": {
         "name": "hawker 20,7\""
+      },
+      "mods": {
+        "name": "GRUPO DE FERROLHO"
       },
       "boca": {
         "name": "supressor monolítico"
@@ -99,50 +97,57 @@
       "coronha": {
         "name": "CORONHA DE CONTROLE"
       },
-      "mods": {
-        "name": "GRUPO DE FERROLHO"
+      "carregador": {
+        "name": "carregador estendido II"
       }
     },
     "photoUrl": "/uploads/1785680029132.png",
-    "proHandle": "boris",
+    "weaponName": "EGRT",
+    "uid": "PrktnjHBDuOWmZv6wLd4GN3zprS2",
     "baseWeaponId": "1783635568517",
     "weaponImage": "/uploads/1793412214962.png",
-    "weaponName": "EGRT"
+    "code": "",
+    "proHandle": "boris"
   },
   {
     "id": "Q3uaDHh6Y6KsGr1XCHUx",
-    "code": "",
     "proHandle": "boris",
-    "photoUrl": "/uploads/1785680162639.png",
+    "code": "",
     "uid": "PrktnjHBDuOWmZv6wLd4GN3zprS2",
+    "baseWeaponId": "1783209625235",
     "attachments": {
-      "acoplamento": {
-        "name": "empunhadura de precisão"
-      },
-      "carregador": {
-        "name": "carregador estendido II"
-      },
-      "boca": {
-        "name": "supressor monolítico"
+      "mods": {
+        "name": "OTAN 7,62 RM"
       },
       "cano": {
         "name": "cano longo 20\""
       },
-      "mods": {
-        "name": "OTAN 7,62 RM"
+      "carregador": {
+        "name": "carregador estendido II"
+      },
+      "acoplamento": {
+        "name": "empunhadura de precisão"
+      },
+      "boca": {
+        "name": "supressor monolítico"
       }
     },
+    "weaponImage": "/uploads/1793411942708.png",
     "weaponName": "MXR 17",
-    "baseWeaponId": "1783209625235",
-    "proName": "camaradaboris",
-    "weaponImage": "/uploads/1793411942708.png"
+    "photoUrl": "/uploads/1785680162639.png",
+    "proName": "camaradaboris"
   },
   {
     "id": "RdManjkl8pQcOCQ15VYk",
-    "photoUrl": "/uploads/1784823929975.png",
+    "code": "",
+    "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2",
+    "weaponName": "AK 27 ROSK",
+    "weaponImage": "/uploads/1793411954283.png",
+    "proName": "Renato Rosk",
+    "proHandle": "renatorosk",
     "attachments": {
-      "cano": {
-        "name": "Cano Pesado VandaL 17,6"
+      "lente": {
+        "name": "Lente Redwell 30-S 2x"
       },
       "boca": {
         "name": "Silenciador Monolitico"
@@ -150,53 +155,55 @@
       "mods": {
         "name": "Muniçao RM"
       },
+      "cano": {
+        "name": "Cano Pesado VandaL 17,6"
+      },
       "carregador": {
         "name": "Carregador Estendido 1"
-      },
-      "lente": {
-        "name": "Lente Redwell 30-S 2x"
       }
     },
-    "proName": "Renato Rosk",
-    "weaponName": "AK 27 ROSK",
     "baseWeaponId": "1783264947249",
-    "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2",
-    "proHandle": "renatorosk",
-    "code": "",
-    "weaponImage": "/uploads/1793411954283.png"
+    "photoUrl": "/uploads/1784823929975.png"
   },
   {
     "id": "VpKBxYUvWwQKUenbTEWu",
-    "uid": "ZVWeGj0InYTDGOfUFJe0hfO55K63",
-    "photoUrl": "/uploads/1785251870214.jpg",
-    "weaponName": "VST",
     "attachments": {
-      "boca": {
-        "name": "estabilizador hawker mk.2"
-      },
       "cano": {
         "name": "CANO ENMITY 9,7"
+      },
+      "coronha": {
+        "name": "REVESTIMENTO hawker cub-55"
       },
       "acoplamento": {
         "name": "VAS CONVERGENCE FOREGRIP"
       },
+      "boca": {
+        "name": "estabilizador hawker mk.2"
+      },
       "carregador": {
         "name": "CARREGADOR ESTENDIDO AVAR"
-      },
-      "coronha": {
-        "name": "REVESTIMENTO hawker cub-55"
       }
     },
-    "proName": "PILI",
+    "uid": "ZVWeGj0InYTDGOfUFJe0hfO55K63",
     "baseWeaponId": "1784216877030",
+    "weaponName": "VST",
+    "proName": "PILI",
+    "photoUrl": "/uploads/1785251870214.jpg",
     "weaponImage": "/uploads/1793412223786.png"
   },
   {
     "id": "XlH8S7B85Eu9yS4G9gAs",
-    "code": "S09-2JF2Q-9B3Y2-HL11",
+    "proHandle": "gerefps",
+    "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2",
+    "baseWeaponId": "1783209442640",
+    "weaponName": "REV 46",
+    "weaponImage": "/uploads/1793411930598.png",
     "attachments": {
       "boca": {
         "name": "Freio de boca LTI"
+      },
+      "lente": {
+        "name": "FANG HOVERPOINT ELO"
       },
       "cano": {
         "name": "cano redwell anolis 9,6"
@@ -206,209 +213,202 @@
       },
       "carregador": {
         "name": "carregador estendido cawdor"
-      },
-      "lente": {
-        "name": "FANG HOVERPOINT ELO"
       }
     },
-    "weaponName": "REV 46",
-    "proName": "Gerefps",
-    "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2",
-    "weaponImage": "/uploads/1793411930598.png",
     "photoUrl": "/uploads/1784861468474.jpeg",
-    "baseWeaponId": "1783209442640",
-    "proHandle": "gerefps"
+    "code": "S09-2JF2Q-9B3Y2-HL11",
+    "proName": "Gerefps"
   },
   {
     "id": "ZOUl9ZnwiBzlPTNns9lB",
-    "baseWeaponId": "1783209442640",
-    "weaponImage": "/uploads/1793411930598.png",
     "weaponName": "REV 46",
+    "weaponImage": "/uploads/1793411930598.png",
+    "uid": "ZVWeGj0InYTDGOfUFJe0hfO55K63",
+    "photoUrl": "/uploads/1785251940138.jpg",
+    "baseWeaponId": "1783209442640",
+    "proName": "PILI",
     "attachments": {
-      "carregador": {
-        "name": "CARREGADOR ESTENDIDO AVAR"
-      },
       "acoplamento": {
         "name": "VAS CONVERGENCE FOREGRIP"
       },
-      "coronha": {
-        "name": "REVESTIMENTO hawker cub-55"
+      "carregador": {
+        "name": "CARREGADOR ESTENDIDO AVAR"
       },
       "boca": {
         "name": "estabilizador hawker mk.2"
       },
+      "coronha": {
+        "name": "REVESTIMENTO hawker cub-55"
+      },
       "cano": {
         "name": "CANO ENMITY 9,7"
       }
-    },
-    "proName": "PILI",
-    "photoUrl": "/uploads/1785251940138.jpg",
-    "uid": "ZVWeGj0InYTDGOfUFJe0hfO55K63"
+    }
   },
   {
     "id": "c4J39SnCD5oB0J14RDMC",
+    "baseWeaponId": "1784832330175",
+    "weaponName": "FG 42",
     "attachments": {
+      "boca": {
+        "name": "supressor monolítico"
+      },
       "coronha": {
         "name": "MFS ambilateral"
-      },
-      "mods": {
-        "name": "munição da RM"
       },
       "cano": {
         "name": "cano de 18\""
       },
-      "boca": {
-        "name": "supressor monolítico"
+      "mods": {
+        "name": "munição da RM"
       },
       "carregador": {
         "name": "estendido debase"
       }
     },
-    "proHandle": "boris",
-    "weaponName": "FG 42",
-    "uid": "PrktnjHBDuOWmZv6wLd4GN3zprS2",
+    "proName": "camaradaboris",
     "photoUrl": "/uploads/1785890027377.png",
     "code": "",
     "weaponImage": "/uploads/1793412294907.png",
-    "proName": "camaradaboris",
-    "baseWeaponId": "1784832330175"
+    "uid": "PrktnjHBDuOWmZv6wLd4GN3zprS2",
+    "proHandle": "boris"
   },
   {
     "id": "cqI4VEMTkODjSoOOFQ8c",
-    "weaponName": "MXR 17",
+    "baseWeaponId": "1783209625235",
+    "proHandle": "gerefps",
+    "photoUrl": "/uploads/1785641570739.jpeg",
     "attachments": {
       "boca": {
         "name": "MONOLITHIC SUPPRESSOR"
+      },
+      "acoplamento": {
+        "name": "VAS CONVERGENCE FOREGRIP"
+      },
+      "mods": {
+        "name": "OTAN 7.62 RM"
       },
       "cano": {
         "name": "17\" GREAVES SCOURGE BARREL"
       },
       "lente": {
         "name": "redwell 30-s 2x"
-      },
-      "mods": {
-        "name": "OTAN 7.62 RM"
-      },
-      "acoplamento": {
-        "name": "VAS CONVERGENCE FOREGRIP"
       }
     },
-    "proHandle": "gerefps",
     "proName": "Gerefps",
     "weaponImage": "/uploads/1793411942708.png",
-    "baseWeaponId": "1783209625235",
-    "photoUrl": "/uploads/1785641570739.jpeg",
+    "weaponName": "MXR 17",
     "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2",
     "code": "A03-2JE9M-EQERH-FU11"
   },
   {
     "id": "sjmd97ib0B3Zkl263lgR",
+    "proHandle": "gerefps",
+    "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2",
+    "photoUrl": "/uploads/1785641648849.jpeg",
     "attachments": {
       "carregador": {
         "name": "CARREGADOR REDWELL SPROCKET"
+      },
+      "coronha": {
+        "name": "CORONHA LEVE CASINO"
+      },
+      "cano": {
+        "name": "CANO GAUNT 11"
       },
       "lente": {
         "name": "FANG HOVERPOINT ELO"
       },
       "boca": {
         "name": "Freio de boca LTI"
-      },
-      "cano": {
-        "name": "CANO GAUNT 11"
-      },
-      "coronha": {
-        "name": "CORONHA LEVE CASINO"
       }
     },
-    "baseWeaponId": "1785337918954",
-    "code": "S15-2W24T-N4MQ5-11",
-    "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2",
-    "photoUrl": "/uploads/1785641648849.jpeg",
     "weaponImage": "/uploads/1785337961977.png",
-    "proHandle": "gerefps",
     "weaponName": "CBRS-3",
+    "code": "S15-2W24T-N4MQ5-11",
+    "baseWeaponId": "1785337918954",
     "proName": "Gerefps"
   },
   {
     "id": "tSLmCNSOXPK3P3iqUzDj",
+    "proName": "Gerefps",
+    "photoUrl": "/uploads/1784861134271.jpeg",
+    "weaponImage": "/uploads/1793412223786.png",
+    "code": "S12-56UK2-KF11",
+    "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2",
+    "baseWeaponId": "1784216877030",
+    "proHandle": "gerefps",
     "attachments": {
       "coronha": {
         "name": "REVESTIMENTO VAS BLENCH"
       },
-      "acoplamento": {
-        "name": "VAS CONVERGENCE FOREGRIP"
-      },
       "carregador": {
         "name": "CARREGADOR ESTENDIDO AVARICE 2"
       },
-      "boca": {
-        "name": "Freio de boca LTI"
+      "acoplamento": {
+        "name": "VAS CONVERGENCE FOREGRIP"
       },
       "cano": {
         "name": "CANO ENMETY 9,7"
+      },
+      "boca": {
+        "name": "Freio de boca LTI"
       }
     },
-    "code": "S12-56UK2-KF11",
-    "proHandle": "gerefps",
-    "weaponName": "VST",
-    "baseWeaponId": "1784216877030",
-    "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2",
-    "weaponImage": "/uploads/1793412223786.png",
-    "photoUrl": "/uploads/1784861134271.jpeg",
-    "proName": "Gerefps"
+    "weaponName": "VST"
   },
   {
     "id": "taBTYkIBYklq4oPx8OzA",
-    "photoUrl": "/uploads/1784851808511.png",
     "uid": "PrktnjHBDuOWmZv6wLd4GN3zprS2",
-    "weaponImage": "/uploads/1793412067608.png",
+    "baseWeaponId": "1783294574404",
     "weaponName": "AN 94",
     "proName": "camaradaboris",
-    "baseWeaponId": "1783294574404",
     "attachments": {
-      "acoplamento": {
-        "name": "empunhadura VAZ"
-      },
-      "carregador": {
-        "name": "carregador estendido II"
-      },
       "boca": {
         "name": "supressor monolítico"
       },
       "cano": {
         "name": "cano longo"
       },
+      "acoplamento": {
+        "name": "empunhadura VAZ"
+      },
+      "carregador": {
+        "name": "carregador estendido II"
+      },
       "coronha": {
         "name": "coronha de controle"
       }
-    }
+    },
+    "weaponImage": "/uploads/1793412067608.png",
+    "photoUrl": "/uploads/1784851808511.png"
   },
   {
     "id": "w9NXEVrJoRTOH7KzApgh",
+    "weaponImage": "/uploads/1793412294907.png",
+    "weaponName": "FG-42 ROSK",
+    "proName": "Renato Rosk",
+    "code": "",
+    "baseWeaponId": "1784832330175",
+    "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2",
+    "proHandle": "renatorosk",
+    "photoUrl": "/uploads/1784845700857.png",
     "attachments": {
-      "lente": {
-        "name": "Fang HoverPoint ELO"
-      },
-      "carregador": {
-        "name": "Carregador Estendido 1"
-      },
-      "boca": {
-        "name": "Silenciador Monolitico"
-      },
       "cano": {
         "name": "Cano Bandolier 16"
       },
       "mods": {
         "name": "Munioçao RM"
+      },
+      "lente": {
+        "name": "Fang HoverPoint ELO"
+      },
+      "boca": {
+        "name": "Silenciador Monolitico"
+      },
+      "carregador": {
+        "name": "Carregador Estendido 1"
       }
-    },
-    "baseWeaponId": "1784832330175",
-    "photoUrl": "/uploads/1784845700857.png",
-    "proName": "Renato Rosk",
-    "proHandle": "renatorosk",
-    "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2",
-    "weaponName": "FG-42 ROSK",
-    "weaponImage": "/uploads/1793412294907.png",
-    "code": ""
+    }
   }
 ]

@@ -1,596 +1,680 @@
 [
   {
     "id": "17831996372122924",
-    "userRole": "MASTER",
-    "previewVideo": "",
-    "recoilImage": "",
     "baseWeaponId": "1783209625235",
-    "code": "A03-2JE9M-EQERH-FU11",
-    "absoluteMeta": false,
     "attachments": {
-      "lente": {
-        "name": "redwell 30-s 2x ",
-        "icon": ""
-      },
       "acoplamento": {
         "icon": "",
         "name": "EMPUNHADURA VAS DE CONVERGENCIA "
       },
-      "cano": {
-        "name": "CANO FLAGELO GRAVES DE 17",
-        "icon": "https://assets.codmunity.gg/optimized/greavesscourgebarrel_bo7_icon.webp"
-      },
-      "boca": {
-        "icon": "https://assets.codmunity.gg/optimized/monolithicsuppressor_bo7_icon.webp",
-        "name": "SILENCIADOR MONOLITICO "
+      "lente": {
+        "icon": "",
+        "name": "redwell 30-s 2x "
       },
       "mods": {
         "icon": "",
         "name": "OTAN 7.62 RM"
+      },
+      "cano": {
+        "icon": "https://assets.codmunity.gg/optimized/greavesscourgebarrel_bo7_icon.webp",
+        "name": "CANO FLAGELO GRAVES DE 17"
+      },
+      "boca": {
+        "icon": "https://assets.codmunity.gg/optimized/monolithicsuppressor_bo7_icon.webp",
+        "name": "SILENCIADOR MONOLITICO "
       }
     },
-    "image": "/uploads/1793411942708.png",
-    "views": 274,
-    "name": "MXR 17",
-    "game": "BO7",
-    "ttk": "600 MS",
-    "votos": 13,
-    "bulletVelocity": 1194.16,
     "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2",
+    "views": 274,
+    "playstyle": "Longo Alcance",
+    "image": "/uploads/1793411942708.png",
+    "code": "A03-2JE9M-EQERH-FU11",
+    "ttk": "600 MS",
+    "recoilImage": "",
+    "bulletVelocity": 1194.16,
+    "votos": 13,
+    "previewVideo": "",
+    "userRole": "MASTER",
     "category": "fuzil de assalto",
     "easeScore": 6.8,
-    "playstyle": "Longo Alcance"
+    "absoluteMeta": false,
+    "game": "BO7",
+    "name": "MXR 17"
   },
   {
     "id": "1783208197675",
-    "playstyle": "Curto Alcance",
-    "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2",
-    "code": "S09-2JF2Q-9B3Y2-HL11",
     "game": "BO7",
     "name": "REV 46",
-    "userRole": "MASTER",
+    "previewVideo": "",
     "attachments": {
-      "cano": {
+      "lente": {
         "icon": "",
-        "name": "cano redwell anolis 9,6"
+        "name": "FANG HOVERPOINT ELO"
+      },
+      "carregador": {
+        "icon": "",
+        "name": "carregador estendido cawdor"
       },
       "mods": {
         "name": "4,6X30 MM PRESURIZADA",
         "icon": ""
       },
+      "cano": {
+        "icon": "",
+        "name": "cano redwell anolis 9,6"
+      },
       "boca": {
         "icon": "",
         "name": "Freio de boca LTI "
-      },
-      "carregador": {
-        "name": "carregador estendido cawdor",
-        "icon": ""
-      },
-      "lente": {
-        "name": "FANG HOVERPOINT ELO",
-        "icon": ""
       }
     },
-    "image": "/uploads/1793411930598.png",
-    "views": 202,
-    "recoilImage": "",
-    "votos": 15,
+    "userRole": "MASTER",
+    "category": "Submetralhadora",
+    "playstyle": "Curto Alcance",
     "absoluteMeta": true,
+    "votos": 15,
+    "image": "/uploads/1793411930598.png",
     "baseWeaponId": "1783209442640",
+    "recoilImage": "",
+    "views": 202,
+    "code": "S09-2JF2Q-9B3Y2-HL11",
     "ttk": "544 MS",
-    "previewVideo": "",
-    "category": "Submetralhadora"
+    "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2"
   },
   {
     "id": "1sFIIPjGFwkdnRs2CA6r",
-    "playstyle": "Longo Alcance",
-    "recoilImage": "",
-    "code": "A16-23Y1W-7P3LQ-11",
+    "image": "/uploads/1793412294907.png",
+    "game": "BO7",
     "attachments": {
-      "coronha": {
-        "name": "CRONHA PLAGIARY",
+      "lente": {
+        "name": "REDWELL 30 S 2X",
+        "icon": ""
+      },
+      "boca": {
+        "name": "MONOLITHIC SUPPRESSOR",
         "icon": ""
       },
       "mods": {
         "icon": "",
         "name": "8X57MM FMJ "
       },
-      "boca": {
-        "icon": "",
-        "name": "MONOLITHIC SUPPRESSOR"
-      },
-      "lente": {
-        "name": "REDWELL 30 S 2X",
-        "icon": ""
-      },
       "cano": {
         "icon": "",
         "name": "CANO BANDOLIER "
       },
       "carregador": {
-        "icon": "",
-        "name": "CARREGADOR ESTENDIDO DEBASE"
+        "name": "CARREGADOR ESTENDIDO DEBASE",
+        "icon": ""
+      },
+      "coronha": {
+        "name": "CRONHA PLAGIARY",
+        "icon": ""
       }
     },
     "name": "FG42",
-    "game": "BO7",
-    "ttk": "0,690 MS",
-    "userRole": "MASTER",
-    "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2",
-    "image": "/uploads/1793412294907.png",
     "previewVideo": "",
     "views": 162,
+    "playstyle": "Longo Alcance",
+    "userRole": "MASTER",
+    "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2",
+    "absoluteMeta": false,
+    "ttk": "0,690 MS",
     "baseWeaponId": "1784832330175",
-    "votos": 6,
-    "absoluteMeta": false
+    "code": "A16-23Y1W-7P3LQ-11",
+    "recoilImage": "",
+    "votos": 6
   },
   {
     "id": "3VaqOTQKWRjQtyGP0rQk",
-    "image": "/uploads/1793411954283.png",
     "playstyle": "Longo Alcance",
-    "userRole": "MASTER",
-    "views": 32,
-    "votos": 1,
-    "ttk": "690 MS",
-    "code": "A02-21XVE-G8CIG-C811",
+    "image": "/uploads/1793411954283.png",
     "attachments": {
-      "cano": {
-        "icon": "",
-        "name": "cano pesado vandal 17,6"
-      },
       "boca": {
         "icon": "",
         "name": "MONOLITHIC SUPPRESSOR"
+      },
+      "lente": {
+        "name": "redwell 30s 2x",
+        "icon": ""
       },
       "mods": {
         "icon": "",
         "name": "MUNIÇÃO DA RM "
       },
       "carregador": {
-        "name": "CARREGADOR ESTENDIDO EPITAPH",
-        "icon": ""
+        "icon": "",
+        "name": "CARREGADOR ESTENDIDO EPITAPH"
       },
-      "lente": {
-        "name": "redwell 30s 2x",
-        "icon": ""
+      "cano": {
+        "icon": "",
+        "name": "cano pesado vandal 17,6"
       }
     },
-    "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2",
-    "category": "fuzil de assalto",
+    "views": 32,
+    "code": "A02-21XVE-G8CIG-C811",
     "baseWeaponId": "1783264947249",
+    "absoluteMeta": false,
     "name": "AK 27",
     "game": "BO7",
-    "absoluteMeta": false
+    "userRole": "MASTER",
+    "category": "fuzil de assalto",
+    "ttk": "690 MS",
+    "votos": 1,
+    "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2"
   },
   {
     "id": "GGCIBHD1fxtIlWpYxesc",
+    "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2",
+    "absoluteMeta": false,
+    "playstyle": "Curto Alcance",
+    "userRole": "MASTER",
+    "ttk": "510 MS",
     "views": 49,
+    "code": "S07-9CWYC-XG11",
+    "image": "/uploads/1793412151057.png",
+    "votos": 4,
     "attachments": {
       "acoplamento": {
-        "name": "VAS CONVERGENCE FOREGRIP",
-        "icon": ""
-      },
-      "coronha": {
         "icon": "",
-        "name": "CORONHA LEVE ITINERANTE "
+        "name": "VAS CONVERGENCE FOREGRIP"
+      },
+      "carregador": {
+        "icon": "",
+        "name": "CARREGADOR ESTENDIDO LOCUS"
       },
       "cano": {
         "icon": "",
         "name": "CANO LTI ASCENDANCY 11,5"
       },
       "boca": {
-        "icon": "",
-        "name": "Freio de boca LTI "
+        "name": "Freio de boca LTI ",
+        "icon": ""
       },
-      "carregador": {
-        "name": "CARREGADOR ESTENDIDO LOCUS",
+      "coronha": {
+        "name": "CORONHA LEVE ITINERANTE ",
         "icon": ""
       }
     },
-    "baseWeaponId": "1783295135589",
-    "code": "S07-9CWYC-XG11",
-    "image": "/uploads/1793412151057.png",
-    "absoluteMeta": false,
-    "votos": 4,
-    "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2",
     "game": "BO7",
-    "name": "STURMWOLF 45",
-    "ttk": "510 MS",
-    "userRole": "MASTER",
-    "playstyle": "Curto Alcance"
+    "baseWeaponId": "1783295135589",
+    "name": "STURMWOLF 45"
   },
   {
     "id": "ILEhUyNF5ABQR7T5sF1R",
-    "votos": 3,
+    "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2",
+    "views": 27,
+    "playstyle": "Curto Alcance",
     "attachments": {
-      "coronha": {
-        "name": "REVESTIMENTO ELO PESADO",
+      "carregador": {
+        "name": "Carregador MFS Renown PI",
+        "icon": ""
+      },
+      "boca": {
+        "name": "Freio de boca LTI ",
         "icon": ""
       },
       "mods": {
         "icon": "",
         "name": "5.7X28 MM RM"
       },
-      "boca": {
-        "name": "Freio de boca LTI ",
-        "icon": ""
-      },
       "cano": {
         "name": "cano leve orbital 8,6",
         "icon": ""
       },
-      "carregador": {
-        "name": "Carregador MFS Renown PI",
+      "coronha": {
+        "name": "REVESTIMENTO ELO PESADO",
         "icon": ""
       }
     },
-    "views": 27,
-    "userRole": "MASTER",
-    "game": "BO7",
-    "ttk": "0,525 MS",
-    "name": "Carbon 57",
-    "image": "/uploads/1793411948576.png",
-    "playstyle": "Curto Alcance",
-    "recoilImage": "",
-    "previewVideo": "",
-    "code": "S05-21WSG-FCAJK-QU11",
     "baseWeaponId": "1783209945126",
-    "absoluteMeta": false,
+    "image": "/uploads/1793411948576.png",
+    "ttk": "0,525 MS",
+    "game": "BO7",
+    "name": "Carbon 57",
+    "previewVideo": "",
+    "userRole": "MASTER",
     "category": "Submetralhadora",
-    "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2"
+    "recoilImage": "",
+    "code": "S05-21WSG-FCAJK-QU11",
+    "votos": 3,
+    "absoluteMeta": false
+  },
+  {
+    "id": "IpbCAr3m99EOJ2p8kvnu",
+    "absoluteMeta": true,
+    "name": "HAN 86",
+    "game": "MW4",
+    "attachments": {
+      "boca": {
+        "name": "FSS IS300",
+        "icon": "/attachments/mw4/fss_is300_mw4_icon.webp",
+        "unlock": "Nível 6"
+      },
+      "lente": {
+        "icon": "/attachments/mw4/cronen_r808_mw4_icon.webp",
+        "unlock": "Nível 12",
+        "name": "Cronen R808"
+      },
+      "cano": {
+        "name": "HANBIT LIGHTNING-7 465 MM",
+        "unlock": "",
+        "icon": ""
+      },
+      "acoplamento": {
+        "icon": "/attachments/mw4/fss_tac90_grip_mw4_icon.webp",
+        "name": "Empunhadura FSS Tac90",
+        "unlock": "Nível 17"
+      },
+      "carregador": {
+        "unlock": "Nível 51",
+        "icon": "/attachments/mw4/45_round_mag_mw4_icon.webp",
+        "name": "Carregador de 45 Projéteis"
+      }
+    },
+    "previewVideo": "",
+    "playstyle": "Longo Alcance",
+    "code": "A03-26ETA-CN8MJ-11",
+    "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2",
+    "ttk": "0,658",
+    "recoilImage": "",
+    "image": "/uploads/1793976978368.png",
+    "baseWeaponId": "1793976978661",
+    "userRole": "MASTER"
   },
   {
     "id": "JRvgGBIsFymYbN00kHVm",
+    "name": "KOGOT 7",
+    "game": "BO7",
+    "baseWeaponId": "1783294520254",
+    "image": "/uploads/1793412057914.png",
     "views": 38,
     "attachments": {
       "carregador": {
         "icon": "",
         "name": "carregador vex expanse "
       },
-      "cano": {
-        "icon": "",
-        "name": "cano targil hock-XR 8,5"
-      },
-      "acoplamento": {
-        "icon": "",
-        "name": "Empunhadura EAM STEADY-90"
-      },
       "boca": {
-        "name": "freio hawker-9 ",
+        "icon": "",
+        "name": "freio hawker-9 "
+      },
+      "cano": {
+        "name": "cano targil hock-XR 8,5",
         "icon": ""
       },
       "coronha": {
         "name": "CORONHA F7 HOWL",
         "icon": ""
+      },
+      "acoplamento": {
+        "icon": "",
+        "name": "Empunhadura EAM STEADY-90"
       }
     },
-    "baseWeaponId": "1783294520254",
     "code": "S10-6K652-8W11",
-    "image": "/uploads/1793412057914.png",
-    "absoluteMeta": false,
-    "votos": 3,
-    "recoilImage": "",
-    "previewVideo": "",
     "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2",
-    "category": "Submetralhadora",
-    "game": "BO7",
-    "name": "KOGOT 7",
     "ttk": "498 MS",
+    "votos": 3,
+    "absoluteMeta": false,
+    "previewVideo": "",
+    "recoilImage": "",
     "playstyle": "Curto Alcance",
-    "userRole": "MASTER"
+    "userRole": "MASTER",
+    "category": "Submetralhadora"
   },
   {
     "id": "L0BMFq112LrM6wuwvoJH",
-    "code": "A09-23Y1W-DYJLZ-11",
-    "image": "/uploads/1793412997682.png",
-    "name": "VOYAK KT-3",
-    "game": "BO7",
-    "ttk": "0,630",
-    "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2",
-    "playstyle": "Longo Alcance",
+    "baseWeaponId": "1784242179048",
     "attachments": {
-      "boca": {
-        "name": "SILENCIADOR MONOLITCO ",
-        "icon": ""
+      "carregador": {
+        "icon": "",
+        "name": "TAMBOR SK-GARRISON"
       },
       "cano": {
         "name": "CANO LTI GRAV-4 ",
         "icon": ""
       },
+      "lente": {
+        "icon": "",
+        "name": "RED WELL 30-S 2X"
+      },
+      "boca": {
+        "name": "SILENCIADOR MONOLITCO ",
+        "icon": ""
+      },
       "coronha": {
         "icon": "",
         "name": "REVISTIMENTO DE CONTROLE V-LAST"
-      },
-      "carregador": {
-        "name": "TAMBOR SK-GARRISON",
-        "icon": ""
-      },
-      "lente": {
-        "name": "RED WELL 30-S 2X",
-        "icon": ""
       }
     },
+    "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2",
+    "playstyle": "Longo Alcance",
+    "image": "/uploads/1793412997682.png",
+    "code": "A09-23Y1W-DYJLZ-11",
+    "ttk": "0,630",
     "recoilImage": "",
     "previewVideo": "",
     "userRole": "MASTER",
     "absoluteMeta": true,
-    "baseWeaponId": "1784242179048"
+    "game": "BO7",
+    "name": "VOYAK KT-3"
   },
   {
     "id": "Pr28f4DILx30jdYp2dkY",
-    "image": "/uploads/1793412067608.png",
-    "views": 73,
-    "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2",
-    "userRole": "MASTER",
-    "votos": 4,
     "playstyle": "Longo Alcance",
+    "category": "fuzil de assalto",
+    "userRole": "MASTER",
+    "ttk": "625 MS",
+    "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2",
     "baseWeaponId": "1783294574404",
-    "recoilImage": "",
-    "absoluteMeta": false,
-    "previewVideo": "",
+    "views": 73,
+    "code": "A13-23Y3A-MYDVW-11",
     "attachments": {
+      "acoplamento": {
+        "icon": "",
+        "name": "VAS CONVERGENCE FOREGRIP"
+      },
       "cano": {
         "icon": "",
         "name": "cano benthic 15"
       },
-      "carregador": {
-        "icon": "",
-        "name": "carregador estendido 2"
+      "lente": {
+        "name": "REDWELL 30-S 2X",
+        "icon": ""
       },
       "boca": {
         "name": "MONOLITHIC SUPPRESSOR",
         "icon": ""
       },
-      "acoplamento": {
-        "name": "VAS CONVERGENCE FOREGRIP",
-        "icon": ""
-      },
-      "lente": {
+      "carregador": {
         "icon": "",
-        "name": "REDWELL 30-S 2X"
+        "name": "carregador estendido 2"
       }
     },
-    "category": "fuzil de assalto",
-    "code": "A13-23Y3A-MYDVW-11",
-    "name": "AN 94",
+    "image": "/uploads/1793412067608.png",
+    "votos": 4,
+    "previewVideo": "",
+    "absoluteMeta": false,
+    "recoilImage": "",
     "game": "BO7",
-    "ttk": "625 MS"
+    "name": "AN 94"
   },
   {
     "id": "XNZO3cUxSedn9WLndnUH",
-    "previewVideo": "",
-    "absoluteMeta": true,
     "image": "/uploads/1793412329624.png",
-    "baseWeaponId": "1793330022767",
+    "game": "BO7",
+    "name": "VMP",
     "playstyle": "Curto Alcance",
-    "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2",
-    "ttk": "0,496",
+    "userRole": "MASTER",
     "attachments": {
-      "acoplamento": {
-        "icon": "",
-        "name": "protetor de mão estabolidador force "
+      "boca": {
+        "name": "freio de boca lti",
+        "icon": ""
       },
       "cano": {
-        "name": "cano nocturnal-VI 14.6",
-        "icon": ""
+        "icon": "",
+        "name": "cano nocturnal-VI 14.6"
       },
       "cabo": {
-        "icon": "",
-        "name": "empunhadura comando tático mfs"
+        "name": "empunhadura comando tático mfs",
+        "icon": ""
       },
-      "boca": {
-        "icon": "",
-        "name": "freio de boca lti"
+      "acoplamento": {
+        "name": "protetor de mão estabolidador force ",
+        "icon": ""
       },
       "carregador": {
-        "name": "carregador estendido 2 ",
-        "icon": ""
+        "icon": "",
+        "name": "carregador estendido 2 "
       }
     },
-    "name": "VMP",
-    "game": "BO7",
+    "baseWeaponId": "1793330022767",
+    "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2",
+    "absoluteMeta": true,
+    "code": "S14-88BZT-JH11",
+    "ttk": "0,496",
     "recoilImage": "",
-    "userRole": "MASTER",
-    "code": "S14-88BZT-JH11"
+    "previewVideo": ""
   },
   {
     "id": "XcRozgSv788AK55YHNHw",
-    "code": "R07-BH8J8-93M11",
     "recoilImage": "",
-    "ttk": "0 MS",
+    "baseWeaponId": "1784863497194",
+    "userRole": "MASTER",
+    "votos": 5,
+    "playstyle": "Atirador de Elite",
+    "game": "BO7",
+    "name": "STRIDER 300",
+    "views": 79,
+    "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2",
+    "previewVideo": "",
+    "image": "/uploads/1793412317054.png",
     "attachments": {
       "laser": {
         "name": "CONJUNTO DE LASERS INSTINTIC DE 1 MW",
         "icon": ""
       },
-      "carregador": {
-        "name": "CARREGADOR RAPIDO CARMATION",
+      "cano": {
+        "name": "CANO SALTIRE DISPATCH 24",
         "icon": ""
       },
       "cabo": {
         "icon": "",
         "name": "EMPUNHADURA REDWELL GORDON"
       },
-      "cano": {
-        "icon": "",
-        "name": "CANO SALTIRE DISPATCH 24"
-      },
       "mods": {
         "name": "FERROLHO RAPIDO",
         "icon": ""
+      },
+      "carregador": {
+        "icon": "",
+        "name": "CARREGADOR RAPIDO CARMATION"
       }
     },
-    "views": 79,
-    "userRole": "MASTER",
-    "image": "/uploads/1793412317054.png",
-    "votos": 5,
-    "playstyle": "Atirador de Elite",
-    "name": "STRIDER 300",
-    "game": "BO7",
-    "previewVideo": "",
-    "baseWeaponId": "1784863497194",
-    "absoluteMeta": false,
-    "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2"
+    "ttk": "0 MS",
+    "code": "R07-BH8J8-93M11",
+    "absoluteMeta": false
   },
   {
     "id": "dejw7m6CVywO7ZrHgcRO",
-    "code": "S12-9CWYK-1611",
     "game": "BO7",
-    "name": "VST",
-    "ttk": "480 MS",
-    "userRole": "MASTER",
+    "absoluteMeta": false,
     "image": "/uploads/1793412223786.png",
+    "name": "VST",
     "views": 117,
-    "playstyle": "Curto Alcance",
     "attachments": {
-      "cano": {
-        "icon": "",
-        "name": "CANO ENMITY 9,7"
-      },
       "carregador": {
-        "name": "CARREGADOR ESTENDIDO AVAR ",
-        "icon": ""
+        "icon": "",
+        "name": "CARREGADOR ESTENDIDO AVAR "
       },
       "boca": {
         "name": "estabilizador hawker mk.2",
         "icon": ""
       },
+      "cano": {
+        "icon": "",
+        "name": "CANO ENMITY 9,7"
+      },
       "coronha": {
-        "name": "REVESTIMENTO VAS BLENCH ",
-        "icon": ""
+        "icon": "",
+        "name": "REVESTIMENTO VAS BLENCH "
       },
       "acoplamento": {
         "icon": "",
         "name": "VAS CONVERGENCE FOREGRIP"
       }
     },
-    "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2",
-    "votos": 5,
-    "recoilImage": "",
     "category": "Submetralhadora",
+    "userRole": "MASTER",
     "previewVideo": "",
-    "absoluteMeta": false,
-    "baseWeaponId": "1784216877030"
+    "code": "S12-9CWYK-1611",
+    "ttk": "480 MS",
+    "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2",
+    "playstyle": "Curto Alcance",
+    "votos": 5,
+    "baseWeaponId": "1784216877030",
+    "recoilImage": ""
   },
   {
     "id": "ega2StgxM03jKeDjdsEt",
-    "image": "/uploads/1793413019782.png",
     "userRole": "MASTER",
-    "ttk": "",
-    "recoilImage": "",
-    "name": "DS20",
-    "playstyle": "Longo Alcance",
-    "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2",
-    "game": "BO7",
     "attachments": {
-      "cano": {
-        "name": "CANO ABDICADOR",
-        "icon": ""
+      "boca": {
+        "icon": "",
+        "name": "SILENCIADOR MONOLITICO "
+      },
+      "lente": {
+        "icon": "",
+        "name": "REDWELL 30-S 2X"
       },
       "carregador": {
         "name": "RESERVA ESTENDIDA GRIFFON 2",
         "icon": ""
       },
-      "boca": {
-        "icon": "",
-        "name": "SILENCIADOR MONOLITICO "
-      },
       "acoplamento": {
-        "name": "EMPUNHADURA VAS CONVERGENCIA",
-        "icon": ""
-      },
-      "lente": {
         "icon": "",
-        "name": "REDWELL 30-S 2X"
+        "name": "EMPUNHADURA VAS CONVERGENCIA"
+      },
+      "cano": {
+        "name": "CANO ABDICADOR",
+        "icon": ""
       }
     },
-    "previewVideo": "",
     "baseWeaponId": "1793413019888",
     "code": "A05-23YA8-YX8F2-11",
-    "absoluteMeta": true
+    "playstyle": "Longo Alcance",
+    "absoluteMeta": true,
+    "game": "BO7",
+    "name": "DS20",
+    "previewVideo": "",
+    "ttk": "",
+    "image": "/uploads/1793413019782.png",
+    "recoilImage": "",
+    "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2"
   },
   {
     "id": "hMko9CHPmF6gphxlhZzm",
+    "game": "BO7",
+    "name": "egrt 57",
+    "playstyle": "Longo Alcance",
+    "category": "fuzil de assalto",
     "userRole": "MASTER",
+    "recoilImage": "",
+    "baseWeaponId": "1783635568517",
+    "votos": 2,
+    "ttk": "666 MS",
+    "code": "A07-9CTTP-BQ11",
+    "image": "/uploads/1793412214962.png",
+    "absoluteMeta": false,
+    "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2",
+    "views": 14,
+    "previewVideo": "",
     "attachments": {
-      "acoplamento": {
-        "icon": "",
-        "name": "VAS CONVERGENCE FOREGRIP"
-      },
-      "coronha": {
-        "name": "CORONHA DE CONTROLE FRIGATE",
+      "carregador": {
+        "name": "carregador de celula de combustivel E3",
         "icon": ""
       },
-      "carregador": {
+      "coronha": {
         "icon": "",
-        "name": "carregador de celula de combustivel E3"
+        "name": "CORONHA DE CONTROLE FRIGATE"
       },
       "cano": {
-        "icon": "",
-        "name": "cano bowen resistor 16.5 "
+        "name": "cano bowen resistor 16.5 ",
+        "icon": ""
+      },
+      "acoplamento": {
+        "name": "VAS CONVERGENCE FOREGRIP",
+        "icon": ""
       },
       "boca": {
         "name": "MONOLITHIC SUPPRESSOR",
         "icon": ""
       }
-    },
+    }
+  },
+  {
+    "id": "oi2lg7IwqzuzMIX8g6fM",
+    "code": "S06-3K9Y5-K39PZ-J111",
+    "playstyle": "Curto Alcance",
+    "image": "/uploads/1793977598426.png",
     "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2",
+    "attachments": {
+      "mods": {
+        "icon": "/attachments/mw4/ammunition_mw4_icon.webp",
+        "name": "9 mm Parabellum Alta Velocidade",
+        "unlock": "Nível 53"
+      },
+      "cabo": {
+        "unlock": "Level 6",
+        "name": "Demo STP-1",
+        "icon": "/attachments/mw4/demo_stp_1_mw4_icon.webp"
+      },
+      "cano": {
+        "icon": "/attachments/mw4/zlr_carbon_900_mw4_icon.webp",
+        "unlock": "Level 41",
+        "name": "ZLR Carbon-900"
+      },
+      "carregador": {
+        "unlock": "Level 10",
+        "name": "Carregador de 40 Projéteis",
+        "icon": "/attachments/mw4/40_round_mag_mw4_icon.webp"
+      },
+      "coronha": {
+        "name": "Coronha Demo Kilo90",
+        "unlock": "Nível 41",
+        "icon": "/attachments/mw4/demo_kilo90_stock_mw4_icon.webp"
+      }
+    },
+    "userRole": "MASTER",
+    "ttk": "0,492",
+    "previewVideo": "",
+    "absoluteMeta": true,
     "recoilImage": "",
-    "code": "A07-9CTTP-BQ11",
-    "image": "/uploads/1793412214962.png",
-    "name": "egrt 57",
-    "views": 14,
-    "game": "BO7",
-    "playstyle": "Longo Alcance",
-    "votos": 2,
-    "category": "fuzil de assalto",
-    "absoluteMeta": false,
-    "baseWeaponId": "1783635568517",
-    "ttk": "666 MS",
-    "previewVideo": ""
+    "name": "ISO NIGH",
+    "game": "MW4",
+    "baseWeaponId": "1793977598534"
   },
   {
     "id": "u7sOkF9ashWpUl7JcUuy",
-    "views": 52,
     "image": "/uploads/1793412208419.png",
-    "votos": 4,
-    "ttk": "650 MS",
-    "userRole": "MASTER",
+    "absoluteMeta": false,
     "code": "A12-2JD6P-5HNPF-M811",
+    "views": 52,
+    "ttk": "650 MS",
+    "previewVideo": "",
+    "recoilImage": "",
     "playstyle": "Longo Alcance",
+    "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2",
+    "name": "MK35 ISR",
+    "game": "BO7",
     "attachments": {
-      "acoplamento": {
-        "name": "=",
-        "icon": ""
-      },
       "coronha": {
-        "icon": "",
-        "name": "CORONHA GRAVES CASSIN"
+        "name": "CORONHA GRAVES CASSIN",
+        "icon": ""
       },
       "carregador": {
         "name": "tambor bowen SIren ",
         "icon": ""
       },
-      "mods": {
-        "icon": "",
-        "name": "5.56 OTAN RM"
-      },
       "boca": {
-        "icon": "",
-        "name": "MONOLITHIC SUPPRESSOR"
+        "name": "MONOLITHIC SUPPRESSOR",
+        "icon": ""
+      },
+      "acoplamento": {
+        "name": "=",
+        "icon": ""
       },
       "cano": {
         "icon": "",
         "name": "cano greaves bellum 16,5"
+      },
+      "mods": {
+        "icon": "",
+        "name": "5.56 OTAN RM"
       }
     },
-    "absoluteMeta": false,
-    "uid": "JslPHq5Xe8VCjUk4jiHsh4z71ff2",
     "baseWeaponId": "1783606781679",
-    "recoilImage": "",
     "category": "fuzil de assalto",
-    "name": "MK35 ISR",
-    "previewVideo": "",
-    "game": "BO7"
+    "userRole": "MASTER",
+    "votos": 4
   }
 ]
