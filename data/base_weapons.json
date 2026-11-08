@@ -376,7 +376,7 @@
     "id": "1793977598534"
   },
   {
-    "name": "Cronem osprey",
+    "name": "Cronen osprey",
     "category": "Fuzil de assalto",
     "playstyle": "Meta Absoluto",
     "game": "MW4",
@@ -390,5 +390,21 @@
     "game": "MW4",
     "image": "/uploads/1793987554438.png",
     "id": "1793987554544"
+  },
+  {
+    "name": "ODEN",
+    "category": "Fuzil de assalto",
+    "playstyle": "Meta Absoluto",
+    "game": "MW4",
+    "image": "/uploads/1794153450958.png",
+    "id": "1794153451251"
+  },
+  {
+    "name": "WZ.55",
+    "category": "Submetralhadora",
+    "playstyle": "Meta Absoluto",
+    "game": "MW4",
+    "image": "/uploads/1794153538135.png",
+    "id": "1794153538217"
   }
 ]

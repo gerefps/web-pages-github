@@ -1126,8 +1126,7 @@
         .meta-card {
             width: 100%;
             border-radius: 20px;
-            background: 
-                radial-gradient(circle at 50% 35%, rgba(0, 25, 45, 0.42) 0%, rgba(2, 6, 12, 0.85) 100%),
+            background: radial-gradient(circle at 50% 35%, rgba(0, 25, 45, 0.42) 0%, rgba(2, 6, 12, 0.85) 100%),
                 url('fundo_card_blur.jpg') center/cover no-repeat;
             border: 2px solid rgba(0, 210, 255, 0.5);
             box-shadow: 
@@ -1540,6 +1539,44 @@
         document.addEventListener('DOMContentLoaded', async () => {
             await window.authReadyPromise;
 
+            
+            let mw4Catalog = null;
+            (async () => {
+                try {
+                    const r = await fetch('data/mw4_catalog.json');
+                    if (r.ok) mw4Catalog = await r.json();
+                } catch(e) {}
+            })();
+
+            function getAttachmentMeta(weapon, slot, item) {
+                let name = '';
+                let icon = '';
+                let unlock = '';
+
+                if (typeof item === 'string') {
+                    name = item;
+                } else if (item && typeof item === 'object') {
+                    name = item.name || '';
+                    icon = item.icon || '';
+                    unlock = item.unlock || '';
+                }
+
+                if ((weapon.game || '').toUpperCase() === 'MW4' && mw4Catalog && mw4Catalog.attachments) {
+                    const clean = name.trim().toLowerCase();
+                    const found = mw4Catalog.attachments.find(a => {
+                        const an = (a.name || '').toLowerCase();
+                        const aen = (a.nameEn || '').toLowerCase();
+                        return an === clean || aen === clean || clean.includes(an) || an.includes(clean) || (aen && (clean.includes(aen) || aen.includes(clean)));
+                    });
+                    if (found) {
+                        if (!icon && found.image) icon = found.image;
+                        if (!unlock && found.unlock) unlock = found.unlock;
+                    }
+                }
+
+                return { name, icon, unlock };
+            }
+        
             let allWeapons = [];
             let baseWeaponsList = [];
             let allPros = [];
@@ -1805,11 +1842,9 @@
                         let attachmentsList = [];
                         if (w.attachments) {
                             for (const [slot, item] of Object.entries(w.attachments)) {
-                                let itemName = '';
-                                if (typeof item === 'string') itemName = item;
-                                else if (item && typeof item === 'object') itemName = item.name;
-                                if (itemName && itemName.trim() !== '') {
-                                    attachmentsList.push({ slot: slot.toUpperCase(), name: itemName });
+                                const attMeta = getAttachmentMeta(w, slot, item);
+                                if (attMeta.name && attMeta.name.trim() !== '') {
+                                    attachmentsList.push({ slot: slot.toUpperCase(), name: attMeta.name, icon: attMeta.icon, unlock: attMeta.unlock });
                                 }
                             }
                         }
@@ -1817,9 +1852,15 @@
                         let attsHtml = '';
                         attachmentsList.slice(0, 5).forEach((att, attIdx) => {
                             const isFull = (attachmentsList.length === 5 && attIdx === 4);
+                            const iconHtml = att.icon ? `<img src="${att.icon}" alt="" style="width:26px; height:26px; object-fit:contain; margin-bottom:2px; filter:drop-shadow(0 2px 4px rgba(0,0,0,0.5));">` : '';
+                            const unlockHtml = att.unlock ? `<span style="font-size:7px; color:#34d399; background:rgba(16,185,129,0.18); border:1px solid rgba(16,185,129,0.4); padding:0 3px; border-radius:2px; font-weight:bold;">${att.unlock}</span>` : '';
                             attsHtml += `
                                 <div class="card-att-box" style="${isFull ? 'grid-column: span 2;' : ''}">
-                                    <div class="card-att-type">${att.slot}</div>
+                                    <div style="display:flex; justify-content:center; align-items:center; gap:4px; margin-bottom:2px; width:100%;">
+                                        <div class="card-att-type">${att.slot}</div>
+                                        ${unlockHtml}
+                                    </div>
+                                    ${iconHtml}
                                     <div class="card-att-name" title="${att.name}">${att.name}</div>
                                 </div>
                             `;
@@ -1905,17 +1946,33 @@
                     Object.values(groupedPros).forEach(g => {
                         let classesHtml = '';
                         g.weapons.forEach((w, index) => {
-                            let attachmentsHtml = '';
-                            if (w.attachments) {
-                                for (const [slot, item] of Object.entries(w.attachments)) {
-                                    let itemName = '';
-                                    if (typeof item === 'string') itemName = item;
-                                    else if (item && typeof item === 'object') itemName = item.name;
-                                    if (itemName && itemName.trim() !== '') {
-                                        attachmentsHtml += `<div class="attachment-pill"><span>${slot.toUpperCase()}</span> ${itemName}</div>`;
-                                    }
+                                                let attachmentsHtml = '';
+                    if (w.attachments) {
+                        for (const [slot, item] of Object.entries(w.attachments)) {
+                            const attMeta = getAttachmentMeta(w, slot, item);
+                            if (attMeta.name && attMeta.name.trim() !== '') {
+                                const iconTag = attMeta.icon ? `<img src="${attMeta.icon}" alt="" style="width:30px; height:30px; object-fit:contain; flex-shrink:0; filter:drop-shadow(0 2px 4px rgba(0,0,0,0.6));">` : '';
+                                const unlockTag = attMeta.unlock ? `<span style="font-size:9.5px; color:#34d399; background:rgba(16,185,129,0.15); border:1px solid rgba(16,185,129,0.35); padding:1px 6px; border-radius:4px; font-weight:bold; letter-spacing:0;">${attMeta.unlock}</span>` : '';
+
+                                if (attMeta.icon || attMeta.unlock) {
+                                    attachmentsHtml += `
+                                        <div class="attachment-pill" style="min-height:64px; display:flex; flex-direction:column; justify-content:space-between;">
+                                            <div style="display:flex; justify-content:space-between; align-items:center; width:100%;">
+                                                <span>${slot.toUpperCase()}</span>
+                                                ${unlockTag}
+                                            </div>
+                                            <div style="display:flex; align-items:center; gap:8px; margin-top:4px;">
+                                                ${iconTag}
+                                                <div style="font-size:13px; font-weight:700; color:#fff; overflow:hidden; text-overflow:ellipsis; white-space:normal; line-height:1.2;">${attMeta.name}</div>
+                                            </div>
+                                        </div>
+                                    `;
+                                } else {
+                                    attachmentsHtml += `<div class="attachment-pill"><span>${slot.toUpperCase()}</span> ${attMeta.name}</div>`;
                                 }
                             }
+                        }
+                    }
 
                             if (w.ttk) {
                                 attachmentsHtml += `<div class="attachment-pill"><span style="color: #ff2a9d;">TTK</span> ${w.ttk}</div>`;
