@@ -406,5 +406,29 @@
     "game": "MW4",
     "image": "/uploads/1794153538135.png",
     "id": "1794153538217"
+  },
+  {
+    "name": "FINN",
+    "category": "Metralhadora Leve",
+    "playstyle": "Meta Absoluto",
+    "game": "MW4",
+    "image": "/uploads/1794329725176.png",
+    "id": "1794329725487"
+  },
+  {
+    "name": "X-58 NYX",
+    "category": "SUBMETRALHADORA",
+    "playstyle": "Meta Absoluto",
+    "game": "MW4",
+    "image": "/uploads/1794330054950.png",
+    "id": "1794330055038"
+  },
+  {
+    "name": "KASTOV 762",
+    "category": "FUZIL DE ASSALTO",
+    "playstyle": "Meta Absoluto",
+    "game": "MW4",
+    "image": "/uploads/1794330462265.png",
+    "id": "1794330462343"
   }
 ]
